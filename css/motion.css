@@ -1,0 +1,50 @@
+/* =========================================================
+   階段 6：動畫整理（規格見 ../設計交接_給Opus.md 第五節）
+   ========================================================= */
+/* 1. 拿掉模糊動畫：只動透明度與位移 */
+.reveal{filter:none;transform:translateY(18px);transition:opacity .7s var(--ease-out),transform .7s var(--ease-out)}
+.reveal.in{transform:none}
+.blur-in{filter:none;transform:translateY(12px)}
+@keyframes blurIn{to{opacity:1;transform:none}}
+.hero h1 .ch{filter:none}
+@keyframes chIn{to{opacity:1;transform:none}}
+@keyframes oscarIn{from{opacity:0;letter-spacing:.3em}to{opacity:1;letter-spacing:.04em}}
+/* 2. 頂端進度條拿掉（高度計與經歷航線已表示進度） */
+.progress{display:none}
+/* 3. 持續循環的動畫減量：光暈只淡入一次、名字流光只跑兩次 */
+.sun{animation:sunIn 2.4s var(--ease-soft) both}
+@keyframes sunIn{from{opacity:0;transform:scale(.94)}to{opacity:.95;transform:none}}
+html[data-sky="night"] .sun{animation:sunIn 2.4s var(--ease-soft) both}
+.hero h1 .oscar{animation-iteration-count:1,2}
+
+/* 4. 動態效果開關（導覽列） */
+.motion-btn{display:grid;place-items:center;width:36px;height:36px;border:1px solid var(--line);background:transparent;color:var(--ink);cursor:pointer;padding:0;position:relative}
+.motion-btn svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round}
+.motion-btn .i-off{display:none}
+html[data-motion="off"] .motion-btn .i-on{display:none}
+html[data-motion="off"] .motion-btn .i-off{display:block}
+.motion-btn:hover{border-color:var(--gold)}
+.motion-btn:focus-visible{outline:1px solid var(--gold-ink);outline-offset:3px}
+.motion-btn .tip{position:absolute;top:calc(100% + 8px);right:0;white-space:nowrap;padding:6px 10px;font:500 12px/1.4 var(--sans);letter-spacing:.08em;background:var(--ink);color:var(--cream);opacity:0;transform:translateY(-4px);pointer-events:none;transition:opacity .25s,transform .25s}
+.motion-btn:hover .tip,.motion-btn:focus-visible .tip,.motion-btn.show .tip{opacity:1;transform:none}
+@media (max-width:420px){.motion-btn{display:none}}   /* 窄手機放不下：仍會跟隨系統的「減少動態效果」 */
+
+/* 關閉動態時＝系統「減少動態效果」的所有規則 */
+html[data-motion="off"] *,html[data-motion="off"] *::before,html[data-motion="off"] *::after{animation:none!important;transition:none!important}
+html[data-motion="off"] .curtain{display:none}
+html[data-motion="off"] .blur-in,html[data-motion="off"] .reveal{opacity:1;filter:none;transform:none}
+html[data-motion="off"] .flight .trail{stroke-dashoffset:0}
+html[data-motion="off"] .hero h1 .ch,html[data-motion="off"] .hero h1 .oscar{opacity:1;filter:none;transform:none}
+html[data-motion="off"] .label::before{transform:none}
+html[data-motion="off"] .display .mask-in{clip-path:none;transform:none}
+html[data-motion="off"] .dark{clip-path:none}
+html[data-motion="off"] .dust,html[data-motion="off"] .route svg{display:none}
+html[data-motion="off"] .pass,html[data-motion="off"] .pass-stub{opacity:1;transform:none}
+html[data-motion="off"] .checklist path{stroke-dashoffset:0}
+html[data-motion="off"] .checklist li{color:var(--ink)}
+html[data-motion="off"] .ife-panel.on .f1-lights i{background:#E5332A}
+html[data-motion="off"] .ife-eq i{transform:scaleY(.6)}
+html[data-motion="off"] .proj-stage.live .proj-list li{opacity:1}
+html[data-motion="off"] .sun{opacity:.95}
+
+@media print{.motion-btn{display:none!important}}

@@ -3,8 +3,10 @@
 <head>
 <meta charset="utf-8">
 <script>try{if(localStorage.getItem('seenIntro'))document.documentElement.classList.add('revisit')}catch(e){}</script>
+<script src="js/theme.js?v=20261116"></script>
+<script src="js/motion.js?v=20261116"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>林家弘 CHIA-HUNG (OSCAR) LIN</title>
+<title data-i18n="meta.title">林家弘 CHIA-HUNG (OSCAR) LIN</title>
 <meta name="description" content="林家弘（Chia-Hung Oscar Lin）的個人網站：高雄醫學大學心理學系 2026 年畢業，修畢兒童發展與早期療育、藝術治療學程，希望成為陪伴孩子成長的臨床心理師。">
 <meta property="og:title" content="林家弘 CHIA-HUNG (OSCAR) LIN">
 <meta property="og:description" content="心理學系畢業，願以所學，成為陪伴孩子成長的臨床心理師。Psychology graduate, Kaohsiung Medical University (2026), aspiring child clinical psychologist.">
@@ -22,394 +24,12 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&family=Noto+Serif+TC:wght@400;500&display=swap" rel="stylesheet">
-<style>
-:root{
-  --cream:#F3EDE4;
-  --paper:#FAF6EF;
-  --card:#FDFAF5;
-  --ink:#2B211A;
-  --muted:#6F6359;
-  --gold:#B08D57;
-  --gold-soft:#CDB389;
-  --gold-ink:#7A5C30;
-  --forest:#26302A;
-  --forest-2:#313D35;
-  --on-dark:#EFE8DC;
-  --on-dark-muted:#B9B1A3;
-  --line:rgba(43,33,26,.14);
-  --line-dark:rgba(239,232,220,.16);
-  --sky-1:#8FBCE6;
-  --sky-2:#BCD8EE;
-  --sky-3:#E6E9E6;
-  --sky-4:#F2E2C6;
-  --serif:'Cormorant Garamond','Noto Serif TC',serif;
-  --sans:'Inter',-apple-system,'PingFang TC','Noto Sans CJK TC','Microsoft JhengHei',system-ui,sans-serif;
-  --zh-serif:'Noto Serif TC','Cormorant Garamond',serif;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-body{font-variant-numeric:lining-nums;font-feature-settings:"lnum" 1;background:var(--cream);color:var(--ink);font-family:var(--sans);font-weight:300;line-height:1.75;overflow-x:hidden}
-a{color:inherit}
-img{max-width:100%;display:block}
-
-/* 語言切換 */
-html[data-lang="zh"] .en{display:none!important}
-html[data-lang="en"] .zh{display:none!important}
-.zh{font-family:inherit}
-
-/* 開場幕布 */
-.curtain{position:fixed;inset:0;z-index:100;background:var(--forest);display:grid;place-items:center;
-  animation:curtainUp .8s cubic-bezier(.77,0,.18,1) .45s forwards}
-.curtain svg{width:64px;height:64px;opacity:0;animation:fadeIn .4s ease .05s forwards}
-@keyframes curtainUp{to{transform:translateY(-100%)}}
-@keyframes fadeIn{to{opacity:1}}
-
-/* 導覽列 */
-.nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;
-  padding:18px clamp(16px,4vw,48px);transition:background .4s,box-shadow .4s}
-.nav.solid{background:rgba(250,246,239,.96);box-shadow:0 1px 0 var(--line)}
-.nav-right{display:flex;align-items:center;gap:18px}
-.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
-.menu-btn{display:none;width:40px;height:36px;border:1px solid var(--line);background:transparent;cursor:pointer;position:relative;color:var(--ink)}
-.menu-btn i,.menu-btn i::before,.menu-btn i::after{position:absolute;left:11px;right:11px;height:1px;background:currentColor;transition:transform .3s,opacity .3s}
-.menu-btn i{top:50%}
-.menu-btn i::before,.menu-btn i::after{content:"";left:0;right:0}
-.menu-btn i::before{top:-6px}
-.menu-btn i::after{top:6px}
-.nav.open .menu-btn i{background:transparent}
-.nav.open .menu-btn i::before{transform:translateY(6px) rotate(45deg)}
-.nav.open .menu-btn i::after{transform:translateY(-6px) rotate(-45deg)}
-
-.brand{display:flex;align-items:center;gap:12px;text-decoration:none}
-.brand svg{width:34px;height:40px}
-.brand-text{font-family:var(--serif);font-size:15px;letter-spacing:.14em;line-height:1.2;text-transform:uppercase}
-.brand-text small{display:block;font-family:var(--sans);font-size:10px;letter-spacing:.2em;color:var(--muted)}
-.nav-links{display:flex;gap:28px;list-style:none}
-.nav-links a{text-decoration:none;font-size:11px;letter-spacing:.2em;text-transform:uppercase;position:relative}
-.nav-links a::after{content:"";position:absolute;left:0;right:0;bottom:-4px;height:1px;background:var(--gold);transform:scaleX(0);transition:transform .3s}
-.nav-links a:hover::after{transform:scaleX(1)}
-.lang{display:flex;border:1px solid var(--line)}
-.lang button{border:0;background:transparent;font:500 11px/1 var(--sans);letter-spacing:.12em;padding:10px 12px;cursor:pointer;color:var(--ink)}
-.lang button[aria-pressed="true"]{background:var(--gold);color:#fff}
-
-/* 高度計 */
-.altimeter{position:fixed;left:clamp(12px,2.2vw,32px);top:50%;transform:translateY(-50%);z-index:40;
-  border-left:1px solid currentColor;padding:6px 0 6px 14px;font-family:'Inter',monospace;color:var(--ink);
-  transition:color .4s;pointer-events:none}
-.altimeter .k{font-size:10px;letter-spacing:.18em;opacity:.7}
-.altimeter .v{font-size:13px;letter-spacing:.06em;font-variant-numeric:tabular-nums;font-weight:500}
-.altimeter .p{font-size:10px;letter-spacing:.16em;margin-top:6px;color:var(--gold-ink)}
-.altimeter.ondark .p{color:var(--gold-soft)}
-.altimeter.ondark{color:var(--on-dark)}
-
-/* 開場天空 */
-.hero{position:relative;min-height:100svh;display:grid;place-items:center;text-align:center;overflow:hidden;
-  background:linear-gradient(180deg,var(--sky-1) 0%,var(--sky-2) 38%,var(--sky-3) 68%,var(--sky-4) 88%,var(--cream) 100%)}
-.cloud{position:absolute;border-radius:50%;background:radial-gradient(closest-side,rgba(255,255,255,.95),rgba(255,255,255,.55) 55%,rgba(255,255,255,0));filter:blur(6px);animation:drift linear infinite}
-.c1{width:620px;height:180px;top:16%;left:-8%;animation-duration:90s}
-.c2{width:480px;height:140px;top:30%;right:-6%;animation-duration:120s;animation-direction:reverse}
-.c3{width:820px;height:220px;bottom:14%;left:18%;animation-duration:140s;opacity:.85}
-.c4{width:360px;height:110px;top:8%;right:22%;animation-duration:100s;opacity:.7}
-@keyframes drift{0%{transform:translateX(-4%)}50%{transform:translateX(4%)}100%{transform:translateX(-4%)}}
-.flight{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
-.flight .trail{fill:none;stroke:rgba(255,255,255,.9);stroke-width:1.4;stroke-linecap:round;stroke-dasharray:1600;stroke-dashoffset:1600;animation:trail 6s ease-in-out 2.2s forwards}
-@keyframes trail{to{stroke-dashoffset:0}}
-.hero-inner{position:relative;z-index:2;padding:120px 20px 80px;max-width:1100px}
-.eyebrow{font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--muted)}
-.hero h1{font-family:var(--serif);font-weight:400;font-size:clamp(48px,9.5vw,138px);line-height:.95;letter-spacing:.02em;margin:22px 0 8px;color:var(--ink)}
-.hero h1 .oscar{display:block;font-style:italic;font-size:.42em;letter-spacing:.04em;color:var(--gold);margin:.25em 0 .1em}
-.hero .zh-name{font-family:var(--zh-serif);font-size:clamp(22px,3vw,32px);letter-spacing:.5em;padding-left:.5em;color:var(--ink)}
-.hero .tagline{max-width:620px;margin:28px auto 0;font-size:clamp(15px,1.6vw,18px);color:#3d332b}
-html[data-lang="zh"] .hero .tagline{font-family:var(--zh-serif);font-size:clamp(16px,1.7vw,19px);letter-spacing:.06em;line-height:1.9}
-html[data-lang="en"] .hero .tagline{font-family:var(--serif);font-style:italic;font-size:clamp(17px,1.8vw,20px)}
-.blur-in{opacity:0;filter:blur(14px);transform:translateY(10px);animation:blurIn 1.2s cubic-bezier(.2,.7,.2,1) forwards}
-@keyframes blurIn{to{opacity:1;filter:blur(0);transform:none}}
-.scroll-cue{position:absolute;bottom:28px;left:0;right:0;margin:0 auto;width:max-content;z-index:2;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);display:flex;flex-direction:column;align-items:center;gap:10px}
-.scroll-cue span{padding-left:.3em}
-.scroll-cue i{display:block;width:1px;height:44px;background:linear-gradient(var(--muted),transparent);animation:cue 2.2s ease-in-out infinite}
-@keyframes cue{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
-
-/* 區塊共用 */
-section{position:relative}
-.wrap{max-width:1180px;margin:0 auto;padding:0 clamp(20px,6vw,72px)}
-.pad{padding:clamp(88px,12vw,150px) 0}
-.label{font-size:11px;font-weight:500;letter-spacing:.26em;text-transform:uppercase;color:var(--gold-ink);display:flex;align-items:center;gap:14px;margin-bottom:28px}
-.label::before{content:"";width:28px;height:1px;background:currentColor}
-.display{font-family:var(--serif);font-weight:400;font-size:clamp(36px,5.2vw,68px);line-height:1.12;letter-spacing:.005em}
-html[data-lang="zh"] .display{font-family:var(--zh-serif);font-size:clamp(30px,4.2vw,54px);line-height:1.35;letter-spacing:.04em}
-.lede{font-size:17px;color:#3d332b}
-.muted{color:var(--muted)}
-.line{display:inline-block;white-space:nowrap}
-html[data-lang="zh"] .about-grid .display{font-size:clamp(28px,3.4vw,46px)}
-
-/* 關於我 */
-.motto{margin:0}
-.motto blockquote{margin:0}
-.motto figcaption{margin-top:22px;display:flex;flex-direction:column;gap:6px}
-.motto .orig{font-family:var(--serif);font-style:italic;font-size:clamp(16px,1.5vw,19px);color:var(--muted);line-height:1.5}
-.motto .src{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-ink)}
-html[data-lang="en"] .about-grid .display{font-style:italic}
-.about-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(32px,6vw,96px);align-items:start}
-.about-grid p+p{margin-top:18px}
-.bio .lede+.lede{margin-top:1em}
-.stats.keys .v{font-size:clamp(19px,1.9vw,24px);line-height:1.45;margin-top:10px}
-html[data-lang="zh"] .stats.keys .v{font-family:var(--zh-serif);letter-spacing:.06em}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);margin-top:clamp(48px,7vw,88px);border:1px solid var(--line);background:var(--card)}
-.stat{padding:24px 22px;border-left:1px solid var(--line)}
-.stat:first-child{border-left:0}
-.stat .k{font-size:10px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
-.stat .v{font-family:var(--serif);font-size:clamp(28px,3vw,40px);line-height:1.2;margin-top:6px}
-.stat .v small{font-size:.5em;color:var(--muted)}
-
-/* 經歷（深色） */
-.dark{background:var(--forest);color:var(--on-dark);overflow:hidden}
-.dark .label{color:var(--gold-soft)}
-.dark .muted{color:var(--on-dark-muted)}
-.waves{position:absolute;inset:0;width:100%;height:100%;opacity:.5;pointer-events:none}
-.waves path{fill:none;stroke:var(--gold-soft);stroke-width:1;opacity:.28}
-.waves g{animation:waveMove 26s linear infinite}
-@keyframes waveMove{to{transform:translateX(-50%)}}
-.log{margin-top:clamp(40px,6vw,72px);border-top:1px solid var(--line-dark)}
-.entry{display:grid;grid-template-columns:220px 1fr;gap:clamp(20px,4vw,64px);padding:clamp(32px,4vw,48px) 0;border-bottom:1px solid var(--line-dark)}
-.entry .when{font-family:'Inter',monospace;font-size:12px;letter-spacing:.14em;color:var(--on-dark-muted)}
-.entry .leg{display:inline-block;margin-top:10px;font-size:10px;letter-spacing:.22em;color:var(--gold-soft);border:1px solid rgba(205,179,137,.4);padding:4px 8px}
-.entry h3{font-family:var(--serif);font-weight:500;font-size:clamp(24px,2.6vw,32px);line-height:1.25}
-html[data-lang="zh"] .entry h3{font-family:var(--zh-serif);font-size:clamp(20px,2.2vw,26px)}
-.entry .org{margin-top:6px;font-size:14px;color:var(--gold-soft);letter-spacing:.04em}
-.entry ul{margin-top:18px;list-style:none}
-.entry li{position:relative;padding-left:22px;color:var(--on-dark);opacity:.92}
-.entry li+li{margin-top:8px}
-.entry li::before{content:"";position:absolute;left:0;top:.85em;width:10px;height:1px;background:var(--gold-soft)}
-
-/* 卡片 */
-.paper{background:var(--paper)}
-.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:clamp(40px,6vw,64px)}
-.cards.four{grid-template-columns:repeat(4,1fr)}
-.card{background:var(--card);padding:30px 28px;transition:background .3s}
-.card:hover{background:#fff}
-.card .k{font-size:10px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-ink)}
-.card h4{font-family:var(--serif);font-weight:500;font-size:22px;line-height:1.3;margin-top:10px}
-html[data-lang="zh"] .card h4{font-family:var(--zh-serif);font-size:18px}
-.card p{margin-top:10px;font-size:14px;color:var(--muted)}
-.edu{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,6vw,96px);align-items:end}
-.edu ul{list-style:none;margin-top:18px}
-.edu li{padding:12px 0;border-bottom:1px solid var(--line)}
-
-/* 個人專案 */
-.proj-sub{margin-top:14px;font-size:15px;color:var(--muted);letter-spacing:.02em}
-.proj-intro{margin-top:22px;max-width:760px}
-.proj-list{list-style:none;margin-top:clamp(36px,5vw,56px);border-top:1px solid var(--line)}
-.proj-list li{display:grid;grid-template-columns:70px 1fr;gap:24px;padding:22px 0;border-bottom:1px solid var(--line)}
-.proj-list .r-no{padding-top:2px}
-.proj-list strong{font-weight:500;color:var(--ink)}
-.proj-list p{color:#3d332b}
-.proj-more{padding-left:94px;margin-top:20px}
-.btns{display:flex;flex-wrap:wrap;gap:14px;margin-top:36px}
-.btns .mail{margin-top:0}
-.btns .mail.solid{background:var(--ink);color:var(--paper)}
-.btns .mail.solid:hover{background:transparent;color:var(--ink)}
-@media (max-width:900px){.proj-list li{grid-template-columns:44px 1fr;gap:12px}.proj-more{padding-left:56px}}
-
-/* 研究 */
-.research{margin-top:clamp(40px,6vw,64px);border-top:1px solid var(--line)}
-.r-item{display:grid;grid-template-columns:70px 1fr 200px;gap:24px;padding:34px 0;border-bottom:1px solid var(--line);align-items:start}
-.r-no{font-family:var(--serif);font-size:20px;color:var(--gold-ink)}
-.r-item h3{font-family:var(--serif);font-weight:500;font-size:clamp(22px,2.4vw,30px);line-height:1.25}
-html[data-lang="zh"] .r-item h3{font-family:var(--zh-serif);font-size:clamp(19px,2vw,24px)}
-.r-item p{margin-top:10px;color:var(--muted);font-size:15px}
-.r-more{margin-top:16px}
-.r-more summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;gap:10px;font-size:12px;letter-spacing:.18em;color:var(--gold-ink);padding:6px 0;user-select:none}
-.r-more summary::-webkit-details-marker{display:none}
-.r-more summary i{position:relative;width:11px;height:11px}
-.r-more summary i::before,.r-more summary i::after{content:"";position:absolute;left:0;right:0;top:5px;height:1px;background:currentColor;transition:transform .35s ease}
-.r-more summary i::after{transform:rotate(90deg)}
-.r-more[open] summary i::after{transform:rotate(0)}
-.r-more summary:hover{color:var(--ink)}
-.r-more summary:focus-visible{outline:1px solid var(--gold);outline-offset:4px}
-.r-more[open] summary .zh::after{content:"（收合）";letter-spacing:.05em}
-.r-more[open] summary .en::after{content:" · close";letter-spacing:.05em}
-.r-more dl{display:grid;grid-template-columns:7.2em 1fr;gap:14px 20px;margin-top:14px;padding:22px 0 6px;border-top:1px solid var(--line)}
-html[data-lang="en"] .r-more dl{grid-template-columns:10em 1fr}
-.r-more dt{font-size:12px;font-weight:500;letter-spacing:.12em;color:var(--gold-ink);padding-top:3px}
-.r-more dd{margin:0;font-size:15px;line-height:1.85;color:#3d332b}
-.r-more[open] dl{animation:moreIn .5s cubic-bezier(.2,.7,.2,1)}
-@keyframes moreIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
-@supports (interpolate-size:allow-keywords){
-  .r-more{interpolate-size:allow-keywords}
-  .r-more::details-content{height:0;overflow:clip;transition:height .5s cubic-bezier(.2,.7,.2,1),content-visibility .5s allow-discrete}
-  .r-more[open]::details-content{height:auto}
-}
-.r-fig{margin:18px 0 6px}
-.r-fig img{display:block;width:100%;max-width:560px;height:auto;border:1px solid var(--line)}
-.r-fig figcaption{margin-top:8px;font-size:12px;letter-spacing:.06em;color:var(--muted)}
-.chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end}
-.chip{font-size:11px;letter-spacing:.1em;border:1px solid var(--line);padding:5px 10px;background:var(--card);white-space:nowrap}
-.chip.gold{border-color:var(--gold-soft);color:var(--gold-ink)}
-
-/* 聯絡（降落） */
-.landing{background:linear-gradient(180deg,var(--cream) 0%,#F1DDC0 45%,#E9C7A6 75%,#D9AE95 100%);text-align:center;overflow:hidden}
-.landing .display{max-width:780px;margin:0 auto}
-.mail{display:inline-flex;align-items:center;gap:12px;margin-top:36px;padding:16px 28px;border:1px solid var(--ink);text-decoration:none;font-size:13px;letter-spacing:.12em;transition:background .3s,color .3s}
-.mail:hover{background:var(--ink);color:var(--paper)}
-.social{list-style:none;display:flex;justify-content:center;gap:14px;margin-top:28px;padding:0}
-.social a{display:grid;place-items:center;width:46px;height:46px;border:1px solid rgba(43,33,26,.35);border-radius:50%;color:var(--ink);transition:background .3s,color .3s,border-color .3s,transform .3s}
-.social a:hover{background:var(--ink);color:var(--paper);border-color:var(--ink);transform:translateY(-2px)}
-.social a:focus-visible{outline:1px solid var(--ink);outline-offset:3px}
-.social svg{width:20px;height:20px}
-.sig{display:block;width:min(460px,78vw);height:auto;margin:clamp(56px,8vw,96px) auto 0}
-
-
-
-footer{padding:48px 0 40px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#5a4a3e}
-
-/* 捲動淡入 */
-.reveal{opacity:0;filter:blur(8px);transform:translateY(26px);transition:opacity 1.1s cubic-bezier(.2,.7,.2,1),filter 1.1s cubic-bezier(.2,.7,.2,1),transform 1.1s cubic-bezier(.2,.7,.2,1)}
-.reveal.in{opacity:1;filter:none;transform:none}
-.d1{transition-delay:.12s}.d2{transition-delay:.24s}.d3{transition-delay:.36s}
-
-
-/* ===== 華麗動畫 ===== */
-/* 頂端航線進度條 */
-.progress{position:fixed;top:0;left:0;right:0;height:2px;z-index:60;background:linear-gradient(90deg,var(--gold),#E8D3A6,var(--gold));transform-origin:left;transform:scaleX(0);pointer-events:none}
-/* 開場光暈與微塵 */
-.sun{position:absolute;width:900px;height:900px;right:-260px;bottom:-420px;border-radius:50%;
-  background:radial-gradient(closest-side,rgba(255,221,170,.75),rgba(255,214,160,.28) 45%,rgba(255,214,160,0) 70%);
-  animation:sunBreath 9s ease-in-out infinite;pointer-events:none}
-@keyframes sunBreath{0%,100%{transform:scale(1);opacity:.85}50%{transform:scale(1.08);opacity:1}}
-.dust{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}
-.landing .wrap{position:relative;z-index:2}
-/* 回訪：跳過幕布，開場動畫加快 */
-html.revisit .curtain{display:none}
-html.revisit .hero .blur-in{animation-delay:0s!important;animation-duration:.7s}
-html.revisit .hero h1 .ch{animation-delay:calc(var(--i) * 18ms);animation-duration:.8s}
-html.revisit .hero h1 .oscar{animation-delay:.25s,2s}
-/* 名字逐字浮現 */
-.hero h1.split{opacity:1;filter:none;transform:none;animation:none}
-.hero h1 .ch{display:inline-block;opacity:0;transform:translateY(.45em) rotate(6deg);filter:blur(10px);
-  animation:chIn 1.2s cubic-bezier(.16,1,.3,1) forwards;animation-delay:calc(.9s + var(--i) * 40ms)}
-.hero h1 .word{display:inline-block;white-space:nowrap}
-@keyframes chIn{to{opacity:1;transform:none;filter:blur(0)}}
-.hero h1 .oscar{opacity:0;background:linear-gradient(110deg,#A9844E 30%,#F6E7C4 48%,#C9A66B 54%,#A9844E 70%);background-size:260% 100%;background-position:100% 0;
-  -webkit-background-clip:text;background-clip:text;color:transparent;
-  animation:oscarIn 1.1s cubic-bezier(.16,1,.3,1) 1.45s forwards,shimmer 5.5s ease-in-out 3s infinite}
-@keyframes oscarIn{from{opacity:0;letter-spacing:.4em;filter:blur(6px)}to{opacity:1;letter-spacing:.04em;filter:blur(0)}}
-@keyframes shimmer{0%{background-position:100% 0}45%,100%{background-position:-60% 0}}
-/* 金線延伸 */
-.label::before{transform:scaleX(0);transform-origin:left;transition:transform 1s cubic-bezier(.16,1,.3,1) .25s}
-.label.in::before{transform:scaleX(1)}
-/* 標題從線後方升起 */
-.display.reveal{opacity:1;filter:none;transform:none}
-.display .mask-in{display:block;clip-path:inset(100% 0 -25% 0);transform:translateY(.55em);
-  transition:clip-path 1.4s cubic-bezier(.16,1,.3,1),transform 1.4s cubic-bezier(.16,1,.3,1)}
-.display.in .mask-in{clip-path:inset(-25% 0 -25% 0);transform:none}
-.display.d1 .mask-in{transition-delay:.12s}
-/* 深色段落像卡片展開 */
-.dark{clip-path:inset(5% 4% 5% 4% round 32px);transition:clip-path 1.5s cubic-bezier(.16,1,.3,1)}
-.dark.open{clip-path:inset(0 0 0 0 round 0)}
-.dark .spot{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .6s;
-  background:radial-gradient(520px circle at var(--mx,50%) var(--my,50%),rgba(205,179,137,.16),transparent 60%)}
-.dark:hover .spot{opacity:1}
-/* 經歷航線與小飛機 */
-.log{position:relative}
-.route{position:absolute;left:-40px;top:0;bottom:0;width:1px;background:var(--line-dark)}
-.route i{position:absolute;inset:0;background:linear-gradient(var(--gold-soft),#F2DDB0);transform-origin:top;transform:scaleY(var(--rp,0))}
-.route svg{position:absolute;left:50%;top:calc(var(--rp,0) * 100%);width:18px;height:18px;transform:translate(-50%,-50%) rotate(90deg);fill:#F2DDB0;filter:drop-shadow(0 0 6px rgba(242,221,176,.6))}
-/* 卡片懸停 */
-.card{position:relative;transition:background .3s,transform .6s cubic-bezier(.16,1,.3,1),box-shadow .6s}
-.card::after{content:"";position:absolute;left:0;right:0;top:0;height:2px;background:linear-gradient(90deg,var(--gold),#E8D3A6);transform:scaleX(0);transform-origin:left;transition:transform .6s cubic-bezier(.16,1,.3,1)}
-.card:hover{transform:translateY(-6px);box-shadow:0 22px 40px -24px rgba(43,33,26,.45);z-index:2}
-.card:hover::after{transform:scaleX(1)}
-.stat{transition:background .4s}
-.stat:hover{background:#fff}
-/* 按鈕掃光 */
-.mail{position:relative;overflow:hidden}
-.mail::before{content:"";position:absolute;top:0;bottom:0;left:-60%;width:40%;background:linear-gradient(100deg,transparent,rgba(232,211,166,.55),transparent);transform:skewX(-20deg);transition:left .8s cubic-bezier(.16,1,.3,1)}
-.mail:hover::before{left:130%}
-@media (max-width:900px){
-  .route{left:-12px}
-  .dark{clip-path:inset(3% 2% 3% 2% round 20px)}
-  .sun{width:600px;height:600px;right:-260px;bottom:-300px}
-}
-
-/* 中等寬度以下：高度計併入導覽列右側，避免壓到內文 */
-@media (max-width:1460px){
-  .altimeter{position:static;transform:none;display:flex;align-items:baseline;gap:10px;
-    border-left:1px solid var(--line);padding:4px 0 4px 12px;color:var(--ink)}
-  .altimeter.ondark{color:var(--ink)}
-  .altimeter .k{display:none}
-  .altimeter .v{font-size:12px}
-  .altimeter .p{margin-top:0}
-  .nav-links{gap:22px}
-}
-@media (max-width:1080px) and (min-width:901px){
-  .altimeter .p{display:none}
-}
-/* 手機 */
-@media (max-width:900px){
-  .nav-links{display:none}
-  .menu-btn{display:block}
-  .nav.open{background:rgba(250,246,239,.98);box-shadow:0 1px 0 var(--line)}
-  .nav.open .nav-links{display:flex;flex-direction:column;gap:0;position:absolute;top:100%;left:0;right:0;background:rgba(250,246,239,.98);border-top:1px solid var(--line);box-shadow:0 12px 24px rgba(43,33,26,.08);padding:6px 0 12px}
-  .nav.open .nav-links a{display:block;padding:14px 24px;font-size:13px}
-  .nav.open .nav-links a::after{display:none}
-  .nav.open .altimeter{color:var(--ink)}
-  .about-grid,.edu{grid-template-columns:1fr}
-  .stats{grid-template-columns:repeat(2,1fr)}
-  .stat:nth-child(3){border-left:0}
-  .stat:nth-child(n+3){border-top:1px solid var(--line)}
-  .entry{grid-template-columns:1fr;gap:12px}
-  .cards,.cards.four{grid-template-columns:1fr}
-  .r-item{grid-template-columns:44px 1fr}
-  .chips{grid-column:2;justify-content:flex-start}
-  .r-more dl,html[data-lang="en"] .r-more dl{grid-template-columns:1fr;gap:4px}
-  .r-more dd{margin-bottom:12px}
-  .altimeter{flex-direction:column;gap:0;padding:2px 0 2px 10px;line-height:1.35}
-  .nav-right{gap:12px}
-  .altimeter .v{font-size:11px}
-  .altimeter .p{font-size:9px}
-}
-@media (max-width:520px){
-  .brand-text small{display:none}
-}
-@media (max-width:460px){
-  .brand-text{display:none}
-  .hero .zh-name{letter-spacing:.3em}
-}
-
-@media (prefers-reduced-motion:reduce){
-  *,*::before,*::after{animation:none!important;transition:none!important}
-  .curtain{display:none}
-  .blur-in,.reveal{opacity:1;filter:none;transform:none}
-  .flight .trail{stroke-dashoffset:0}
-  .hero h1 .ch,.hero h1 .oscar{opacity:1;filter:none;transform:none}
-  .label::before{transform:none}
-  .display .mask-in{clip-path:none;transform:none}
-  .dark{clip-path:none}
-  .dust,.progress,.route svg{display:none}
-  .r-more[open] dl{animation:none}
-  .r-more::details-content{transition:none}
-}
-
-/* 列印 */
-@media print{
-  @page{margin:16mm 14mm}
-  .curtain,.nav,.progress,.dust,.sun,.cloud,.flight,.scroll-cue,.route,.social,.menu-btn,.altimeter,.sig,.r-more summary{display:none!important}
-  html,body{background:#fff!important;color:#111!important}
-  *{animation:none!important;transition:none!important}
-  .reveal,.blur-in,.hero h1 .ch,.hero h1 .oscar,.display .mask-in{opacity:1!important;filter:none!important;transform:none!important;clip-path:none!important}
-  .hero h1 .oscar{background:none!important;color:#7A5C30!important}
-  .hero{min-height:0!important;height:auto!important;padding:0 0 8mm!important;background:none!important}
-  .pad{padding:8mm 0!important}
-  .dark,.landing,.paper{background:#fff!important;color:#111!important;clip-path:none!important}
-  .dark *,.landing *{color:#111!important}
-  .entry,.r-item,.stat,.card,.proj-list li,.r-fig{break-inside:avoid}
-  .label,h2,h3,.display{break-after:avoid}
-  section{break-inside:auto}
-  .r-more dl{display:grid!important;border-top:0;padding-top:4px}
-  .btns a[href^="http"]::after,.mail[href^="mailto"]::after{content:" " attr(href);font-size:10px}
-  .mail::before{display:none}
-}
-</style>
+<link rel="stylesheet" href="css/tokens.css?v=20261116">
+<link rel="stylesheet" href="css/main.css?v=20261116">
+<link rel="stylesheet" href="css/theme.css?v=20261116">
+<link rel="stylesheet" href="css/type.css?v=20261116">
+<link rel="stylesheet" href="css/sections.css?v=20261116">
+<link rel="stylesheet" href="css/motion.css?v=20261116">
 </head>
 <body>
 
@@ -427,29 +47,46 @@ html.revisit .hero h1 .oscar{animation-delay:.25s,2s}
 </svg>
 
 <header class="nav" id="nav">
-  <a class="brand" href="#top" aria-label="回到頂端">
+  <a class="brand" href="#top" aria-label="回到頂端" data-i18n-aria="nav.home">
     <svg viewBox="0 0 64 64"><use href="#psi"/></svg>
     <span class="brand-text">Chia-Hung Lin<small>林家弘 · Portfolio</small></span>
   </a>
   <ul class="nav-links" id="navLinks">
-    <li><a href="#about"><span class="zh">關於</span><span class="en">About</span></a></li>
-    <li><a href="#experience"><span class="zh">經歷</span><span class="en">Experience</span></a></li>
-    <li><a href="#education"><span class="zh">學歷</span><span class="en">Education</span></a></li>
-    <li><a href="#project"><span class="zh">專案</span><span class="en">Projects</span></a></li>
-    <li><a href="#research"><span class="zh">研究</span><span class="en">Research</span></a></li>
-    <li><a href="#contact"><span class="zh">聯絡</span><span class="en">Contact</span></a></li>
+    <li><a href="#about"><span data-i18n="nav.about">關於</span></a></li>
+    <li><a href="#experience"><span data-i18n="nav.experience">經歷</span></a></li>
+    <li><a href="#education"><span data-i18n="nav.education">學歷</span></a></li>
+    <li><a href="#project"><span data-i18n="nav.project">專案</span></a></li>
+    <li><a href="#research"><span data-i18n="nav.research">研究</span></a></li>
+    <li><a href="#contact"><span data-i18n="nav.contact">聯絡</span></a></li>
   </ul>
   <div class="nav-right">
-<div class="altimeter" id="alt" aria-hidden="true">
+<div class="altimeter" id="alt" aria-hidden="true" title="高度計：隨著往下捲動而下降，代表閱讀進度">
     <div class="k">ALTITUDE</div>
     <div class="v"><span id="altv">32,000</span> FT</div>
     <div class="p" id="altp">CRUISING</div>
   </div>
-  <div class="lang" role="group" aria-label="Language">
-    <button type="button" data-set="zh" aria-pressed="true">中</button>
-    <button type="button" data-set="en" aria-pressed="false">EN</button>
-  </div>
-  <button type="button" class="menu-btn" id="menuBtn" aria-controls="navLinks" aria-expanded="false"><span class="sr-only"><span class="zh">選單</span><span class="en">Menu</span></span><i aria-hidden="true"></i></button>
+  <button type="button" class="motion-btn" id="motionBtn" aria-pressed="true" aria-label="動態效果：開">
+    <svg class="i-on" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 8c3-3 6 3 9 0s6 3 9 0M3 16c3-3 6 3 9 0s6 3 9 0"/></svg>
+    <svg class="i-off" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 8h18M3 16h18"/></svg>
+    <span class="tip" aria-hidden="true"></span>
+  </button>
+  <button type="button" class="theme-btn" id="themeBtn" data-mode="auto" aria-label="外觀">
+    <svg class="i-auto" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 1 0 16z" fill="currentColor" stroke="none"/></svg>
+    <svg class="i-light" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8"/></svg>
+    <svg class="i-dark" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.500 10.500z"/></svg>
+    <span class="tip" aria-hidden="true"></span>
+  </button>
+  <label class="lang">
+    <span class="sr-only" data-i18n="nav.language">語言</span>
+    <select id="langSelect">
+      <option value="zh-Hant" lang="zh-Hant">繁中</option>
+      <option value="zh-Hans" lang="zh-Hans">简中</option>
+      <option value="en" lang="en">EN</option>
+      <option value="ja" lang="ja">日本語</option>
+      <option value="ko" lang="ko">한국어</option>
+    </select>
+  </label>
+  <button type="button" class="menu-btn" id="menuBtn" aria-controls="navLinks" aria-expanded="false"><span class="sr-only"><span data-i18n="nav.menu">選單</span></span><i aria-hidden="true"></i></button>
   </div>
 </header>
 <div class="progress" id="progress" aria-hidden="true"></div>
@@ -465,66 +102,86 @@ html.revisit .hero h1 .oscar{animation-delay:.25s,2s}
     <path id="route" class="trail" d="M-60 640 C 320 560, 620 300, 980 250 S 1380 170, 1520 120"/>
     <g opacity="0">
       <path d="M0 0 L-14 -4 L-18 -12 L-21 -12 L-19 -3 L-30 -2 L-34 -7 L-36 -7 L-35 0 L-36 7 L-34 7 L-30 2 L-19 3 L-21 12 L-18 12 L-14 4 Z" fill="#fff"/>
+      <circle class="navlight r" cx="-19.500" cy="-12" r="1.700" fill="#FF6B5C"/><circle class="navlight g" cx="-19.500" cy="12" r="1.700" fill="#6BE39A"/>
       <animate attributeName="opacity" from="0" to="1" begin="2.2s" dur=".4s" fill="freeze"/>
       <animateMotion dur="6s" begin="2.2s" fill="freeze" rotate="auto" keyPoints="0;1" keyTimes="0;1" calcMode="spline" keySplines=".45 .05 .55 .95"><mpath href="#route"/></animateMotion>
     </g>
   </svg>
   <div class="hero-inner">
-    <p class="eyebrow blur-in" style="animation-delay:.8s"><span class="zh">個人網站 · 2026</span><span class="en">Portfolio · 2026</span></p>
+    <p class="eyebrow blur-in" style="animation-delay:.8s"><span data-i18n="hero.eyebrow">個人網站 · 2026</span></p>
     <h1 class="blur-in" style="animation-delay:.9s">Chia-Hung Lin<span class="oscar">— Oscar —</span></h1>
     <p class="zh-name blur-in" style="animation-delay:1.1s">林家弘</p>
     <p class="tagline blur-in" style="animation-delay:1.25s">
-      <span class="zh"><span class="line">畢業於高雄醫學大學心理學系，</span><br><span class="line">願以所學，</span><span class="line">成為陪伴孩子成長的臨床心理師。</span></span>
-      <span class="en">A psychology graduate of Kaohsiung Medical University, hoping to become a clinical psychologist who walks alongside children as they grow.</span>
+      <span data-i18n="hero.tagline"><span class="line">畢業於高雄醫學大學心理學系，</span><br><span class="line">願以所學，</span><span class="line">成為陪伴孩子成長的臨床心理師。</span></span>
     </p>
+    <div class="pass" role="group" aria-label="登機證" data-i18n-aria="pass.title">
+      <div class="pass-main">
+        <div class="pass-top"><span class="pass-k">Boarding Pass<span class="pass-local"> · <span data-i18n="pass.title">登機證</span></span></span><span class="pass-k pass-flight">OCL 2026</span></div>
+        <div class="pass-route">
+          <div class="pass-cell"><span class="pass-k">From</span><strong data-i18n="pass.from">斗六 DOULIU</strong></div>
+          <div class="pass-line" aria-hidden="true"><svg viewBox="-40 -14 44 28"><path d="M0 0 L-14 -4 L-18 -12 L-21 -12 L-19 -3 L-30 -2 L-34 -7 L-36 -7 L-35 0 L-36 7 L-34 7 L-30 2 L-19 3 L-21 12 L-18 12 L-14 4 Z"/></svg></div>
+          <div class="pass-cell to"><span class="pass-k">To</span><strong data-i18n="pass.to">兒童臨床心理師</strong></div>
+        </div>
+        <div class="pass-bottom"><span class="pass-k">Passenger</span><span class="pass-name" data-i18n="pass.passenger">LIN CHIA-HUNG／OSCAR</span></div>
+      </div>
+      <div class="pass-stub">
+        <div class="pass-cell"><span class="pass-k">Gate</span><b>ψ</b></div>
+        <div class="pass-cell"><span class="pass-k">Seat</span><b>2026</b></div>
+        <div class="pass-cell"><span class="pass-k">Class</span><b data-i18n="pass.class">心理學</b></div>
+        <i class="pass-bar" aria-hidden="true"></i>
+      </div>
+    </div>
   </div>
-  <div class="scroll-cue blur-in" style="animation-delay:1.7s"><span class="zh">往下捲動</span><span class="en">Scroll</span><i></i></div>
+  <div class="scroll-cue blur-in" style="animation-delay:1.7s"><span data-i18n="hero.scroll">往下捲動</span><i></i></div>
 </section>
 
 <!-- 關於我 -->
 <section id="about" class="pad">
   <div class="wrap">
-    <p class="label reveal"><span class="zh">01 — 關於我</span><span class="en">01 — About</span></p>
-    <h2 class="sr-only"><span class="zh">關於我</span><span class="en">About me</span></h2>
+    <p class="label reveal"><span data-i18n="about.label">01 — 關於我</span></p>
+    <h2 class="sr-only"><span data-i18n="about.heading">關於我</span></h2>
     <div class="about-grid">
       <figure class="motto">
         <blockquote class="display reveal d1">
-          <span class="zh"><span class="line">勇氣不是無所畏懼，</span><br><span class="line">而是心懷畏懼，</span><span class="line">依然前行。</span></span>
-          <span class="en">Courage is not an absence of fear. Courage is fear walking.</span>
+          <span data-i18n="about.motto"><span class="line">勇氣不是無所畏懼，</span><br><span class="line">而是心懷畏懼，</span><span class="line">依然前行。</span></span>
         </blockquote>
         <figcaption class="reveal d2">
-          <span class="zh orig">Courage is not an absence of fear. Courage is fear walking.</span>
-          <span class="src">— Susan David</span>
+          <span class="orig" data-i18n="about.mottoOriginal">Courage is not an absence of fear. Courage is fear walking.</span>
+          <span class="src" data-i18n="about.mottoSource">— Susan David</span>
         </figcaption>
+        <div class="checklist reveal d2" id="checklist">
+          <p class="check-title" data-i18n="check.title">起飛前檢查表</p>
+          <ol>
+            <li><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="1" y="1" width="18" height="18"/><path d="M5 10.5l3.2 3.2L15 6.5"/></svg><span data-i18n="check.1">先訂目標、理清順序</span></li>
+            <li><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="1" y="1" width="18" height="18"/><path d="M5 10.5l3.2 3.2L15 6.5"/></svg><span data-i18n="check.2">逐項完成</span></li>
+            <li><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="1" y="1" width="18" height="18"/><path d="M5 10.5l3.2 3.2L15 6.5"/></svg><span data-i18n="check.3">交付前再三確認</span></li>
+            <li><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="1" y="1" width="18" height="18"/><path d="M5 10.5l3.2 3.2L15 6.5"/></svg><span data-i18n="check.4">犯了錯，回頭想清楚怎麼做得更好</span></li>
+          </ol>
+        </div>
       </figure>
       <div class="bio reveal d2">
         <p class="lede">
-          <span class="zh">我是林家弘，來自雲林斗六。大一就讀醫學社會學與社會工作學系，後來轉入心理學系，並修習兒童發展與早期療育、藝術治療兩個學分學程，2026 年 6 月畢業於高雄醫學大學。</span>
-          <span class="en">I'm Chia-Hung (Oscar) Lin, from Douliu, Yunlin. I began in the Department of Medical Sociology and Social Work, later transferred to Psychology, and completed two credit programs, in Child Development &amp; Early Intervention and in Art Therapy, before graduating from Kaohsiung Medical University in June 2026.</span>
+          <span data-i18n="about.p1">我是林家弘，來自雲林斗六。大一就讀醫學社會學與社會工作學系，後來轉入心理學系，並修習兒童發展與早期療育、藝術治療兩個學分學程，2026 年 6 月畢業於高雄醫學大學。</span>
         </p>
         <p class="lede">
-          <span class="zh">我做事細心而有條理，習慣先理清順序、再逐項完成，交出去之前總會再三確認；待人溫和，旁人需要時，我樂於做那個傾聽的人。犯了錯，我會停下來想一想，下一次怎麼做得更好。</span>
-          <span class="en">I'm careful and organized: I sort out the order first, work through things one by one, and double-check before handing anything in. I try to be gentle with people, and when someone needs it, I'm glad to be the one who listens. When I make a mistake, I stop and think about how to do better next time.</span>
+          <span data-i18n="about.p2">畢業後，我在雲林縣政府社會處擔任約僱人員，也曾在兒少代表共識營擔任工作人員。那幾天，我看到孩子們在短短時間內突破自己；其中也有身心障礙的孩子，看到他們彼此扶持、互相幫忙，我覺得非常溫暖，也對他們的未來充滿希望。這讓我更確定想走的路：成為一位陪伴孩子成長的兒童臨床心理師。接下來，我打算報考臨床心理研究所。</span>
         </p>
         <p class="lede">
-          <span class="zh">畢業後，我在雲林縣政府社會處擔任約僱人員，也曾在兒少代表共識營擔任工作人員。與孩子們相處的那幾天，讓我更確定想走的路：成為一位陪伴孩子成長的兒童臨床心理師。往後，我也打算報考臨床心理研究所。</span>
-          <span class="en">After graduating, I worked as contract staff at the Department of Social Affairs, Yunlin County Government, and served as staff at a youth representatives' workshop. The days I spent with those young people made me surer of the path I want: to become a child clinical psychologist who walks alongside children as they grow. I plan to apply to a graduate program in clinical psychology.</span>
+          <span data-i18n="about.p3">做事上，我細心而有條理，習慣先訂好目標、理清順序，再逐項完成，交付之前總會再三確認；與人相處時，我待人溫和，旁人需要時，樂於做那個傾聽的人。犯了錯，我會從中反思，想清楚下一次怎麼做得更好。</span>
         </p>
         <p class="lede">
-          <span class="zh">工作之外，我熱愛一切與飛航有關的事物，這個網站的高度計與航線也由此而來；閒暇時也愛看 F1 賽車，聽華語、西洋和 K-pop。</span>
-          <span class="en">Outside of work, I love everything about aviation; the altimeter and flight route on this site come from that. I also enjoy watching Formula 1 and listening to Mandopop, Western music, and K-pop.</span>
+          <span data-i18n="about.p4">我期許自己成為勇於嘗試的人：不必等到不怕了才出發，帶著畏懼，也能往前走。</span>
         </p>
-        <p class="lede">
-          <span class="zh">我想成為勇於嘗試的人：不必等到不怕了才出發，帶著畏懼，也能往前走。</span>
-          <span class="en">I want to be someone who takes on new things. You don't have to wait until you're unafraid to set out; you can walk forward, fear and all.</span>
+        <p class="muted">
+          <span data-i18n="about.note">工作之外，我熱愛飛航，這個網站的高度計與航線就是從這裡來的；閒暇時也喜歡看 F1、聽音樂。</span>
         </p>
       </div>
     </div>
     <div class="stats keys reveal d3">
-      <div class="stat"><div class="k"><span class="zh">家鄉</span><span class="en">Hometown</span></div><div class="v"><span class="zh">雲林斗六</span><span class="en">Douliu, Yunlin</span></div></div>
-      <div class="stat"><div class="k"><span class="zh">學程</span><span class="en">Programs</span></div><div class="v"><span class="zh">早療・藝術治療</span><span class="en">Early Intervention&nbsp;· Art Therapy</span></div></div>
-      <div class="stat"><div class="k"><span class="zh">志向</span><span class="en">Aspiration</span></div><div class="v"><span class="zh">兒童臨床心理</span><span class="en">Child Clinical Psychology</span></div></div>
-      <div class="stat"><div class="k"><span class="zh">熱愛</span><span class="en">Loves</span></div><div class="v"><span class="zh">飛航・F1・音樂</span><span class="en">Aviation&nbsp;· F1&nbsp;· Music</span></div></div>
+      <div class="stat"><div class="k"><span data-i18n="about.keyHometown">家鄉</span></div><div class="v"><span data-i18n="about.valHometown">雲林斗六</span></div></div>
+      <div class="stat"><div class="k"><span data-i18n="about.keyPrograms">學程</span></div><div class="v"><span data-i18n="about.valPrograms">早療・藝術治療</span></div></div>
+      <div class="stat"><div class="k"><span data-i18n="about.keyAspiration">志向</span></div><div class="v"><span data-i18n="about.valAspiration">兒童臨床心理</span></div></div>
+      <a class="stat stat-link" href="#interests"><div class="k"><span data-i18n="about.keyInterests">興趣</span></div><div class="v"><span data-i18n="about.valInterests">飛航・F1・音樂</span></div></a>
     </div>
   </div>
 </section>
@@ -541,19 +198,19 @@ html.revisit .hero h1 .oscar{animation-delay:.25s,2s}
     </g>
   </svg>
   <div class="wrap" style="position:relative">
-    <p class="label reveal"><span class="zh">02 — 經歷</span><span class="en">02 — Experience</span></p>
-    <h2 class="display reveal d1"><span class="zh">從公部門到團隊專案</span><span class="en">From public service to team projects</span></h2>
+    <p class="label reveal"><span data-i18n="exp.label">02 — 經歷</span></p>
+    <h2 class="display reveal d1"><span data-i18n="exp.heading">從公部門到團隊專案</span></h2>
 
     <div class="log">
       <article class="entry reveal">
         <div><div class="when">2024.07 — 2024.08</div><span class="leg">LEG 01</span></div>
         <div>
-          <h3><span class="zh">暑期工讀生</span><span class="en">Summer Student Assistant</span></h3>
-          <p class="org"><span class="zh">斗六地政事務所 登記課</span><span class="en">Registration Section, Douliu Land Office</span></p>
+          <h3><span data-i18n="exp.leg1.role">暑期工讀生</span></h3>
+          <p class="org"><span data-i18n="exp.leg1.org">斗六地政事務所 登記課</span></p>
           <ul>
-            <li><span class="zh">經雲林縣政府大專青年公部門暑期工讀計畫分發至此</span><span class="en">Placed through the Yunlin County Government's summer public-sector program for college students</span></li>
-            <li><span class="zh">土地與建物登記案件歸檔、裝訂成冊，並製作目錄</span><span class="en">Filed and bound land and building registration cases, and compiled their indexes</span></li>
-            <li><span class="zh">信託文件掃描建檔、書狀用印</span><span class="en">Scanned trust documents into the filing system and stamped certificates</span></li>
+            <li><span data-i18n="exp.leg1.b1">經雲林縣政府大專青年公部門暑期工讀計畫分發至此</span></li>
+            <li><span data-i18n="exp.leg1.b2">土地與建物登記案件歸檔、裝訂成冊，並製作目錄</span></li>
+            <li><span data-i18n="exp.leg1.b3">信託文件掃描建檔、書狀用印</span></li>
           </ul>
         </div>
       </article>
@@ -561,13 +218,13 @@ html.revisit .hero h1 .oscar{animation-delay:.25s,2s}
       <article class="entry reveal">
         <div><div class="when">2025.06 — 2025.07</div><span class="leg">LEG 02</span></div>
         <div>
-          <h3><span class="zh">實習生・專案組長</span><span class="en">Intern &amp; Project Team Leader</span></h3>
-          <p class="org"><span class="zh">知山樂伯股份有限公司（HappyLab）</span><span class="en">HappyLab Co., Ltd.</span></p>
+          <h3><span data-i18n="exp.leg2.role">實習生・專案組長</span></h3>
+          <p class="org"><span data-i18n="exp.leg2.org">知山樂伯股份有限公司（HappyLab）</span></p>
           <ul>
-            <li><span class="zh">高醫「心理學實務與實習」課程實習，成績 A+</span><span class="en">Internship for the "Practicum in Psychology" course at KMU (grade: A+)</span></li>
-            <li><span class="zh">帶領 6 人團隊，五週內企劃 10 集 Podcast《Die溝》，主題是世代溝通與正向心理學；實習期間完成其中 4 集的錄製與剪輯</span><span class="en">Led a 6-person team in planning a 10-episode podcast, <i>Die溝</i> (a pun on 代溝, “generation gap”), on intergenerational communication and positive psychology, over five weeks; four episodes were recorded and edited during the internship</span></li>
-            <li><span class="zh">安排進度與分工、每週開會，會前一天在群組提醒並附上摘要；擔任與業師聯繫的窗口</span><span class="en">Scheduled tasks and held weekly meetings, posting a reminder and agenda summary in the group chat the day before; served as the team's point of contact with our mentor</span></li>
-            <li><span class="zh">負責 EP03、EP05、EP09 的音檔剪輯（含降噪、音量標準化等），並與另一位剪輯組員交叉試聽；與組員共同主持 EP09〈躺平文化〉</span><span class="en">Edited audio for EP03, EP05 and EP09 (including noise reduction and loudness normalization), cross-checking with the other editor; co-hosted EP09 on "lying flat" culture</span></li>
+            <li><span data-i18n="exp.leg2.b1">高醫「心理學實務與實習」課程實習，成績 A+</span></li>
+            <li><span data-i18n="exp.leg2.b2">帶領 6 人團隊，五週內企劃 10 集 Podcast《Die溝》，主題是世代溝通與正向心理學；實習期間完成其中 4 集的錄製與剪輯</span></li>
+            <li><span data-i18n="exp.leg2.b3">安排進度與分工、每週開會，會前一天在群組提醒並附上摘要；擔任與業師聯繫的窗口</span></li>
+            <li><span data-i18n="exp.leg2.b4">負責 EP03、EP05、EP09 的音檔剪輯（含降噪、音量標準化等），並與另一位剪輯組員交叉試聽；與組員共同主持 EP09〈躺平文化〉</span></li>
           </ul>
         </div>
       </article>
@@ -575,13 +232,13 @@ html.revisit .hero h1 .oscar{animation-delay:.25s,2s}
       <article class="entry reveal">
         <div><div class="when">2026.08 — 2026.10</div><span class="leg">LEG 03</span></div>
         <div>
-          <h3><span class="zh">約僱人員（科員職務代理）</span><span class="en">Contract Administrative Staff (Acting Section Officer)</span></h3>
-          <p class="org"><span class="zh">雲林縣政府社會處 婦幼及少年福利科</span><span class="en">Women, Children and Youth Welfare Section, Department of Social Affairs, Yunlin County Government</span></p>
+          <h3><span data-i18n="exp.leg3.role">約僱人員（科員職務代理）</span></h3>
+          <p class="org"><span data-i18n="exp.leg3.org">雲林縣政府社會處 婦幼及少年福利科</span></p>
           <ul>
-            <li><span class="zh">電子公文處理、簽稿撰擬與陳核；處內交辦的表單填報與彙整</span><span class="en">Processed electronic official documents; drafted memos and submitted them for approval; compiled forms requested by the department</span></li>
-            <li><span class="zh">獨立製作長青食堂鄉鎮亮點簡報（斗六場、北港場），依科長與督導意見修正，活動當天協助操作簡報</span><span class="en">Independently produced presentation slides for two township senior-dining events (Douliu, Beigang), revised them based on supervisors' feedback, and helped operate the slides on the day of the event</span></li>
-            <li><span class="zh">彙整、重新排版並更新科內分機表與業務分工表</span><span class="en">Reorganized and updated the section's phone extension list and duty assignment table</span></li>
-            <li><span class="zh">擔任兒少代表共識營工作人員，負責現場協助與活動攝影</span><span class="en">Served as staff at a youth representatives' workshop, assisting on site and taking event photos</span></li>
+            <li><span data-i18n="exp.leg3.b1">電子公文處理、簽稿撰擬與陳核；處內交辦的表單填報與彙整</span></li>
+            <li><span data-i18n="exp.leg3.b2">獨立製作長青食堂鄉鎮亮點簡報（斗六場、北港場），依科長與督導意見修正，活動當天協助操作簡報</span></li>
+            <li><span data-i18n="exp.leg3.b3">彙整、重新排版並更新科內分機表與業務分工表</span></li>
+            <li><span data-i18n="exp.leg3.b4">擔任兒少代表共識營工作人員，負責現場協助與活動攝影</span></li>
           </ul>
         </div>
       </article>
@@ -592,23 +249,29 @@ html.revisit .hero h1 .oscar{animation-delay:.25s,2s}
 <!-- 學歷與榮譽 -->
 <section id="education" class="paper pad">
   <div class="wrap">
-    <p class="label reveal"><span class="zh">03 — 學歷與榮譽</span><span class="en">03 — Education &amp; Honors</span></p>
+    <p class="label reveal"><span data-i18n="edu.label">03 — 學歷與榮譽</span></p>
     <div class="edu">
-      <h2 class="display reveal d1"><span class="zh">高雄醫學大學<br>心理學系 學士</span><span class="en">B.S. in Psychology,<br>Kaohsiung Medical University</span></h2>
+      <div class="edu-head">
+      <h2 class="display reveal d1"><span data-i18n="edu.degree">高雄醫學大學<br>心理學系 學士</span></h2>
+      <div class="gauges reveal d2" id="gauges">
+        <div class="gauge" style="--p:.8993"><svg viewBox="0 0 100 100" aria-hidden="true"><circle class="g-bg" cx="50" cy="50" r="44"/><circle class="g-arc" cx="50" cy="50" r="44" pathLength="100"/></svg><div class="g-v">89.93</div><div class="g-k" data-i18n="gauge.avg">學業平均</div></div>
+        <div class="gauge" style="--p:.9636"><svg viewBox="0 0 100 100" aria-hidden="true"><circle class="g-bg" cx="50" cy="50" r="44"/><circle class="g-arc" cx="50" cy="50" r="44" pathLength="100"/></svg><div class="g-v">3<small>/55</small></div><div class="g-k" data-i18n="gauge.rank">系排名</div></div>
+        <div class="gauge three"><svg viewBox="0 0 100 100" aria-hidden="true"><circle class="g-bg" cx="50" cy="50" r="44"/><circle class="g-arc s1" cx="50" cy="50" r="44" pathLength="100"/><circle class="g-arc s2" cx="50" cy="50" r="44" pathLength="100"/><circle class="g-arc s3" cx="50" cy="50" r="44" pathLength="100"/></svg><div class="g-v">×3</div><div class="g-k" data-i18n="gauge.award">書卷獎</div></div>
+      </div>
+      </div>
       <div class="reveal d2">
         <p class="muted" style="font-family:'Inter',monospace;font-size:12px;letter-spacing:.14em">2022.09 — 2026.06</p>
         <ul>
-          <li><span class="zh">學業平均 89.93，系排名 3/55</span><span class="en">Average 89.93, ranked 3rd of 55 in the department</span></li>
-          <li><span class="zh">111 學年上、下學期皆為全系第一（1/62）</span><span class="en">Ranked 1st of 62 in both semesters of the 2022–23 academic year</span></li>
-          <li><span class="zh">兒童發展與早期療育學分學程：早期療育導論、早期療育實務、發展心理學等，共 22 學分</span><span class="en">Child Development &amp; Early Intervention credit program: Introduction to Early Intervention, Early Intervention Practice, Developmental Psychology, and more (22 credits)</span></li>
-          <li><span class="zh">藝術治療學分學程：藝術治療、臨床心理學導論、變態心理學等，共 21 學分</span><span class="en">Art Therapy credit program: Art Therapy, Introduction to Clinical Psychology, Abnormal Psychology, and more (21 credits)</span></li>
+          <li><span data-i18n="edu.b2">111 學年上、下學期皆為全系第一（1/62）</span></li>
+          <li><span data-i18n="edu.b3">兒童發展與早期療育學分學程：早期療育導論、早期療育實務、發展心理學等，共 22 學分</span></li>
+          <li><span data-i18n="edu.b4">藝術治療學分學程：藝術治療、臨床心理學導論、變態心理學等，共 21 學分</span></li>
         </ul>
       </div>
     </div>
     <div class="cards">
-      <div class="card reveal"><div class="k"><span class="zh">獎學金</span><span class="en">Scholarship</span></div><h4><span class="zh">書卷獎</span><span class="en">Academic Excellence Scholarship</span></h4><p><span class="zh">共三個學期：111-2、112-1、112-2</span><span class="en">Three semesters (2023–2024)</span></p></div>
-      <div class="card reveal d1"><div class="k"><span class="zh">競賽</span><span class="en">Award</span></div><h4><span class="zh">壁報論文競賽 佳作</span><span class="en">Honorable Mention</span></h4><p><span class="zh">2023 高醫人社院大學生研究計畫成果壁報論文競賽</span><span class="en">2023 KMU College of Humanities and Social Sciences Undergraduate Research Poster Competition</span></p></div>
-      <div class="card reveal d2"><div class="k"><span class="zh">語言</span><span class="en">Language</span></div><h4>TOEIC 720 · GEPT</h4><p><span class="zh">多益聽讀 720 分（2022）；全民英檢中級複試通過</span><span class="en">TOEIC Listening &amp; Reading 720 (2022); GEPT Intermediate Level passed</span></p></div>
+      <div class="card reveal"><div class="k"><span data-i18n="edu.c1.key">獎學金</span></div><h4><span data-i18n="edu.c1.title">書卷獎</span></h4><p><span data-i18n="edu.c1.desc">共三個學期（111 學年下學期、112 學年上下學期）</span></p></div>
+      <div class="card reveal d1"><div class="k"><span data-i18n="edu.c2.key">競賽</span></div><h4><span data-i18n="edu.c2.title">壁報論文競賽 佳作</span></h4><p><span data-i18n="edu.c2.desc">2023 高醫人社院大學生研究計畫成果壁報論文競賽</span></p></div>
+      <div class="card reveal d2"><div class="k"><span data-i18n="nav.language">語言</span></div><h4>TOEIC 720 · GEPT</h4><p><span data-i18n="edu.c3.desc">多益聽讀 720 分（2022）；全民英檢中級複試通過</span></p></div>
     </div>
   </div>
 </section>
@@ -616,64 +279,66 @@ html.revisit .hero h1 .oscar{animation-delay:.25s,2s}
 <!-- 個人專案 -->
 <section id="project" class="pad">
   <div class="wrap">
-    <p class="label reveal"><span class="zh">04 — 個人專案</span><span class="en">04 — Personal Project</span></p>
-    <h2 class="display reveal d1"><span class="zh">Notedly｜留著看</span><span class="en">Notedly</span></h2>
+    <p class="label reveal"><span data-i18n="proj.label">04 — 個人專案</span></p>
+    <h2 class="display reveal d1"><span data-i18n="proj.heading">Notedly｜留著看</span></h2>
     <p class="proj-sub reveal d1">
-      <span class="zh">AI 稍後閱讀 App（個人專案，與 AI 程式助理 Claude Code 協作）｜2026.10 — 2026.11</span>
-      <span class="en">AI-Powered Read-Later App for iPhone &amp; iPad (Personal Project, Built with Claude Code) | Oct – Nov 2026</span>
+      <span data-i18n="proj.sub">AI 稍後閱讀 App｜個人專案，與 Claude Code 協作開發｜2026.10 — 2026.11</span>
     </p>
     <p class="lede proj-intro reveal d2">
-      <span class="zh">我負責發想、規劃、指揮、測試和上架，程式碼由 AI 程式助理 Claude Code 撰寫。</span>
-      <span class="en">I came up with the idea, planned it, directed the work, tested it, and launched it; the code was written by the AI coding assistant Claude Code.</span>
+      <span data-i18n="proj.intro">我負責發想、規劃、指揮、測試和上架，程式碼由 AI 程式助理 Claude Code 撰寫。</span>
     </p>
     <div class="stats reveal d2">
-      <div class="stat"><div class="k"><span class="zh">從開始到上架</span><span class="en">Idea to launch</span></div><div class="v">11<small><span class="zh"> 天</span><span class="en"> days</span></small></div></div>
-      <div class="stat"><div class="k"><span class="zh">上架國家和地區</span><span class="en">Countries &amp; regions</span></div><div class="v">174</div></div>
-      <div class="stat"><div class="k"><span class="zh">支援語言</span><span class="en">Languages</span></div><div class="v">5</div></div>
-      <div class="stat"><div class="k"><span class="zh">上架隔天推出</span><span class="en">Released next day</span></div><div class="v">v1.1</div></div>
+      <div class="stat"><div class="k"><span data-i18n="proj.stat1">從開始到上架</span></div><div class="v">11<small><span data-i18n="proj.stat1Unit"> 天</span></small></div></div>
+      <div class="stat"><div class="k"><span data-i18n="proj.stat2">上架國家和地區</span></div><div class="v">174</div></div>
+      <div class="stat"><div class="k"><span data-i18n="proj.stat3">支援語言</span></div><div class="v">5</div></div>
+      <div class="stat"><div class="k"><span data-i18n="proj.stat4">上架隔天推出</span></div><div class="v">v1.1</div></div>
     </div>
+    <div class="proj-stage">
+      <figure class="proj-shot" role="img" aria-label="Notedly App 的畫面" data-i18n-aria="proj.shotAlt">
+        <img data-shot="01_list" src="assets/notedly/zh-Hant/01_list.webp" width="640" height="1390" alt="" loading="lazy" decoding="async" class="on">
+        <img data-shot="03_detail" src="assets/notedly/zh-Hant/03_detail.webp" width="640" height="1390" alt="" loading="lazy" decoding="async">
+        <img data-shot="02_map" src="assets/notedly/zh-Hant/02_map.webp" width="640" height="1390" alt="" loading="lazy" decoding="async">
+        <img data-shot="05_folder" src="assets/notedly/zh-Hant/05_folder.webp" width="640" height="1390" alt="" loading="lazy" decoding="async">
+        <img data-shot="04_ask" src="assets/notedly/zh-Hant/04_ask.webp" width="640" height="1390" alt="" loading="lazy" decoding="async">
+      </figure>
     <ul class="proj-list">
-      <li class="reveal"><span class="r-no">01</span><p>
-        <span class="zh"><strong>從零到上架：</strong>自行規劃並指揮 AI 程式助理開發，11 天內（10/23–11/03）讓 iOS／iPadOS App 正式上架 App Store，在 174 個國家和地區提供 5 種語言；上架隔天推出 1.1 版。</span>
-        <span class="en"><strong>Zero to launch:</strong> Planned and directed development with an AI coding assistant, launching an iOS/iPadOS app on the App Store in 11 days (Oct 23–Nov 3), available in 174 countries and regions in 5 languages; released version 1.1 the day after launch.</span>
+      <li class="reveal" data-shot="01_list"><span class="r-no">01</span><p>
+        <span data-i18n="proj.b1"><strong>從零到上架：</strong>11 天內（10/23–11/03）讓 iOS／iPadOS App 正式上架 App Store，在 174 個國家和地區提供 5 種語言；上架隔天推出 1.1 版。</span>
       </p></li>
-      <li class="reveal"><span class="r-no">02</span><p>
-        <span class="zh"><strong>產品規劃：</strong>負責發想、定義功能與排定優先順序，每項功能都寫好測試步驟；完成分享收藏、截圖文字辨識、AI 摘要與自動分類、美食景點地圖、iPhone 與 iPad 雲端同步等功能。程式碼（約 9,400 行）由 AI 撰寫，我負責下指令、驗收和決定方向。</span>
-        <span class="en"><strong>Product planning:</strong> Defined and prioritized features, writing test steps for each one; shipped link and screenshot saving with text recognition, AI summaries and auto-categorization, a saved-places map, and cloud sync across iPhone and iPad. The AI wrote the code (about 9,400 lines); I gave instructions, accepted or rejected the results, and set the direction.</span>
+      <li class="reveal" data-shot="03_detail"><span class="r-no">02</span><p>
+        <span data-i18n="proj.b2"><strong>產品規劃：</strong>負責發想、定義功能與排定優先順序，每項功能都寫好測試步驟；完成分享收藏、截圖文字辨識、AI 摘要與自動分類、美食景點地圖、iPhone 與 iPad 雲端同步等功能。程式碼約 9,400 行。</span>
       </p></li>
-      <li class="reveal"><span class="r-no">03</span><p>
-        <span class="zh"><strong>真機測試：</strong>在自己的 iPhone、iPad 上逐項實測，包含實際出門測試「經過附近提醒」，再依測試結果要求修正。</span>
-        <span class="en"><strong>Real-device testing:</strong> Tested every feature on my own iPhone and iPad, including field-testing location-based reminders outdoors, and requested fixes based on the results.</span>
+      <li class="reveal" data-shot="02_map"><span class="r-no">03</span><p>
+        <span data-i18n="proj.b3"><strong>真機測試：</strong>在自己的 iPhone、iPad 上逐項實測，包含實際出門測試「經過附近提醒」，再依測試結果要求修正。</span>
       </p></li>
-      <li class="reveal"><span class="r-no">04</span><p>
-        <span class="zh"><strong>上架與商業手續：</strong>獨自完成五種語言的商店頁、隱私權揭露與送審；另外辦好 Apple 付費合約、銀行帳戶、美國 W-8BEN 稅務表、台灣稅務問卷，並申請小型開發者計劃。</span>
-        <span class="en"><strong>Launch and business setup:</strong> Handled the entire App Store process alone, including store listings in 5 languages, privacy disclosures, and app review, plus Apple's paid apps agreement, bank account, U.S. W-8BEN tax form, and Taiwan tax questionnaire, and applied for the Small Business Program.</span>
+      <li class="reveal" data-shot="05_folder"><span class="r-no">04</span><p>
+        <span data-i18n="proj.b4"><strong>上架與商業手續：</strong>獨自完成五種語言的商店頁、隱私權揭露與送審；另外辦好 Apple 付費合約、銀行帳戶、美國 W-8BEN 稅務表、台灣稅務問卷，並申請 App Store 小型企業方案。</span>
       </p></li>
-      <li class="reveal"><span class="r-no">05</span><p>
-        <span class="zh"><strong>成本與宣傳：</strong>除了 Apple 開發者年費，其他全用免費方案；架設五語官方網站、規劃 Threads 貼文與宣傳圖，並設好下載來源追蹤連結。</span>
-        <span class="en"><strong>Cost and marketing:</strong> Kept costs to the Apple Developer fee by using free tiers for everything else; built a 5-language website, planned Threads posts and promotional graphics, and set up tracking links by download source.</span>
+      <li class="reveal" data-shot="04_ask"><span class="r-no">05</span><p>
+        <span data-i18n="proj.b5"><strong>成本與宣傳：</strong>除了 Apple 開發者年費，其他全用免費方案；架設五種語言的官方網站、規劃 Threads 貼文與宣傳圖，並設好下載來源追蹤連結。</span>
       </p></li>
     </ul>
+    </div>
     <details class="r-more proj-more reveal">
-      <summary><span class="zh">了解更多</span><span class="en">Read more</span><i aria-hidden="true"></i></summary>
+      <summary><span data-i18n="more.open">了解更多</span><i aria-hidden="true"></i></summary>
       <dl>
-        <dt><span class="zh">這是什麼</span><span class="en">What it is</span></dt>
-        <dd><span class="zh">iPhone、iPad 的「稍後閱讀」App。看到想留的貼文或截圖，分享進來，AI 會自動寫摘要、分類，餐廳和景點會標在地圖上。</span><span class="en">A read-it-later app for iPhone and iPad. Share a post or screenshot you want to keep, and AI writes a summary and sorts it; restaurants and places are pinned on a map.</span></dd>
-        <dt><span class="zh">為什麼想做</span><span class="en">Why I built it</span></dt>
-        <dd><span class="zh">我常存下許多實用的貼文和資訊，收藏之後卻很少回頭看。市面上已有不少同類 App，但很多不支援中文，也少了自動分類這類我想要的功能。看了 Papaya 電腦教室的 App 教學影片後，我決定自己做一個，讓收藏的東西能更有效地整理起來，也想試試看，沒有程式背景的自己能做到什麼程度。</span><span class="en">I often saved useful posts and information, then rarely looked at them again. Many similar apps did not support Chinese and lacked features I wanted, such as automatic categorization. After watching an app-building tutorial from the Taiwanese channel Papaya Computer Classroom, I decided to build my own, so that what I saved could be organized more effectively, and to see how far someone with no programming background could go.</span></dd>
-        <dt><span class="zh">我和 AI 怎麼分工</span><span class="en">Me and the AI</span></dt>
-        <dd><span class="zh">程式碼由 Claude Code 撰寫；我負責想點子、決定做哪些功能、寫開發計劃和每項功能的測試步驟、在真機上驗收，以及上架、商業手續和宣傳。</span><span class="en">Claude Code wrote the code. I came up with the idea, decided which features to build, wrote the development plan and test steps for every feature, checked each one on real devices, and handled the launch, business paperwork, and marketing.</span></dd>
-        <dt><span class="zh">還有哪些功能</span><span class="en">More features</span></dt>
-        <dd><span class="zh">用自然語言問自己存過的內容（「問問你的筆記」）；每週回顧提醒、主畫面小工具；可以用自己的 Google Gemini 金鑰，或裝置上的 Apple Intelligence；九種主題色，App 圖示跟著換色；可以從其他 App 匯入，垃圾桶 30 天內可以復原。</span><span class="en">Ask questions about your saved items in plain language (“Ask your notes”); weekly review reminders and a home-screen widget; use your own Google Gemini key or on-device Apple Intelligence; nine theme colors, with the app icon changing to match; import from other apps, and restore deleted items from the trash within 30 days.</span></dd>
-        <dt><span class="zh">最難的一步</span><span class="en">The hardest part</span></dt>
-        <dd><span class="zh">讓它在眾多同類 App 中脫穎而出。上架之後，我規劃 Threads 貼文、製作宣傳圖、架設五種語言的官方網站，也設好下載來源追蹤連結。</span><span class="en">Making it stand out among many similar apps. After launch, I planned Threads posts, made promotional graphics, built an official website in five languages, and set up tracking links by download source.</span></dd>
-        <dt><span class="zh">我學到</span><span class="en">What I learned</span></dt>
-        <dd><span class="zh">和 AI 協作，關鍵在於把需求說得夠精準。一個產品從想法到上架，程式只是其中一部分；商店頁、隱私權、稅務和宣傳，每一件都得自己處理。只有實際測過，才知道有沒有問題；請親朋好友試用、聽他們的回饋，也很重要。</span><span class="en">Working with AI comes down to describing what you need precisely. Code is only one part of taking a product from idea to launch; the store listing, privacy, taxes, and marketing were all mine to handle. You only know whether something works once you have tested it yourself, and asking friends and family to try it and listening to their feedback matters too.</span></dd>
+        <dt><span data-i18n="proj.q1">這是什麼</span></dt>
+        <dd><span data-i18n="proj.a1">iPhone、iPad 的「稍後閱讀」App。看到想留的貼文或截圖，分享進來，AI 會自動寫摘要、分類，餐廳和景點會標在地圖上。</span></dd>
+        <dt><span data-i18n="proj.q2">為什麼想做</span></dt>
+        <dd><span data-i18n="proj.a2">我常存下許多實用的貼文和資訊，收藏之後卻很少回頭看。市面上已有不少同類 App，但很多不支援中文，也少了自動分類這類我想要的功能。看了 Papaya 電腦教室的 App 教學影片後，我決定自己做一個，讓收藏的東西能更有效地整理起來，也想試試看，沒有程式背景的自己能做到什麼程度。</span></dd>
+        <dt><span data-i18n="proj.q3">我和 AI 怎麼分工</span></dt>
+        <dd><span data-i18n="proj.a3">程式碼由 Claude Code 撰寫；我負責想點子、決定做哪些功能、寫開發計劃和每項功能的測試步驟、在真機上驗收，以及上架、商業手續和宣傳。</span></dd>
+        <dt><span data-i18n="proj.q4">還有哪些功能</span></dt>
+        <dd><span data-i18n="proj.a4">用自然語言問自己存過的內容（「問問你的筆記」）；每週回顧提醒、主畫面小工具；可以用自己的 Google Gemini 金鑰，或裝置上的 Apple Intelligence；九種主題色，App 圖示跟著換色；可以從其他 App 匯入，垃圾桶 30 天內可以復原。</span></dd>
+        <dt><span data-i18n="proj.q5">最難的一步</span></dt>
+        <dd><span data-i18n="proj.a5">讓它在眾多同類 App 中脫穎而出。上架之後，我規劃 Threads 貼文、製作宣傳圖、架設五種語言的官方網站，也設好下載來源追蹤連結。</span></dd>
+        <dt><span data-i18n="proj.q6">我學到</span></dt>
+        <dd><span data-i18n="proj.a6">和 AI 協作，關鍵在於把需求說得夠精準。一個產品從想法到上架，程式只是其中一部分；商店頁、隱私權、稅務和宣傳，每一件都得自己處理。只有實際測過，才知道有沒有問題；請親朋好友試用、聽他們的回饋，也很重要。</span></dd>
       </dl>
     </details>
     <div class="btns reveal">
       <a class="mail solid" href="https://apps.apple.com/app/id6827010114" target="_blank" rel="noopener">App Store <span aria-hidden="true">↗</span></a>
-      <a class="mail" href="https://getnotedly.web.app" target="_blank" rel="noopener"><span class="zh">官方網站</span><span class="en">Website</span> <span aria-hidden="true">↗</span></a>
+      <a class="mail" href="https://getnotedly.web.app" target="_blank" rel="noopener"><span data-i18n="proj.website">官方網站</span> <span aria-hidden="true">↗</span></a>
     </div>
   </div>
 </section>
@@ -681,93 +346,149 @@ html.revisit .hero h1 .oscar{animation-delay:.25s,2s}
 <!-- 研究 -->
 <section id="research" class="paper pad">
   <div class="wrap">
-    <p class="label reveal"><span class="zh">05 — 研究專案</span><span class="en">05 — Research</span></p>
-    <h2 class="display reveal d1"><span class="zh">訪談、實驗與媒體分析</span><span class="en">Interviews, experiments &amp; media analysis</span></h2>
+    <p class="label reveal"><span data-i18n="res.label">05 — 研究專案</span></p>
+    <h2 class="display reveal d1"><span data-i18n="res.heading">訪談、實驗與媒體分析</span></h2>
     <div class="research">
       <article class="r-item reveal">
         <span class="r-no">01</span>
         <div>
-          <h3><span class="zh">數位科技對華人家庭情感表達的影響</span><span class="en">How Digital Technology Shapes Emotional Expression in Chinese Families</span></h3>
-          <p><span class="zh">半結構式深度訪談。我與組員共同設計訪綱，個人訪談 2 位受訪者、整理並編碼 2 份逐字稿；書面報告撰寫文獻回顧、研究目標、方法、結果與研究限制。</span><span class="en">Semi-structured interviews. I co-designed the interview guide, interviewed 2 participants, transcribed and coded 2 transcripts, and wrote the literature review, aims, methods, results, and limitations sections.</span></p>
+          <h3><span data-i18n="res.r1.title">數位科技對華人家庭情感表達的影響</span></h3>
+          <p><span data-i18n="res.r1.summary">半結構式深度訪談。我與組員共同設計訪綱；個人訪談 2 位受訪者，整理並編碼 2 份逐字稿，以主題分析法歸納；在書面報告中撰寫文獻回顧、研究目標、方法、結果與研究限制。</span></p>
           <details class="r-more">
-            <summary><span class="zh">了解更多</span><span class="en">Read more</span><i aria-hidden="true"></i></summary>
+            <summary><span data-i18n="more.open">了解更多</span><i aria-hidden="true"></i></summary>
             <dl>
-              <dt><span class="zh">在問什麼</span><span class="en">The question</span></dt>
-              <dd><span class="zh">華人家庭常常「愛在心裡口難開」。大學生離家後，LINE 和貼圖會不會讓家人之間比較說得出口？</span><span class="en">Chinese families often leave love unspoken. Once students leave home for college, do LINE messages and stickers make it easier to say how they feel?</span></dd>
-              <dt><span class="zh">怎麼做</span><span class="en">How</span></dt>
-              <dd><span class="zh">4 人小組，以半結構式深度訪談訪問 8 位 21～23 歲的大學生，錄音轉成逐字稿後，用主題分析法整理。</span><span class="en">Team of 4. We conducted semi-structured in-depth interviews with 8 college students aged 21–23, transcribed the recordings, and analyzed them with thematic analysis.</span></dd>
-              <dt><span class="zh">我負責</span><span class="en">My role</span></dt>
-              <dd><span class="zh">和組員一起發想主題、設計訪綱；訪談 2 位受訪者，整理並編碼 2 份逐字稿；期中口頭報告。書面報告中，我撰寫了文獻回顧、研究目標、方法、結果與研究限制，也負責全文排版。</span><span class="en">Developed the topic and interview guide with my teammates; interviewed 2 participants and transcribed and coded 2 transcripts; gave the midterm oral presentation. In the written report, I wrote the literature review, research aims, methods, results, and limitations, and formatted the full report.</span></dd>
-              <dt><span class="zh">發現</span><span class="en">Findings</span></dt>
-              <dd><span class="zh">多數家庭仍然「做多於說」，用匯款、問一句「在幹嘛」表達關心。貼圖和文字降低了道謝、說愛的尷尬；但文字少了語氣，負面情緒容易被誤會，「已讀」也帶來回覆的壓力。</span><span class="en">Most families still “do more than they say,” showing care by sending money or asking “what are you up to?” Stickers and text ease the awkwardness of saying thank you or I love you, but text lacks tone, so negative feelings are easily misread, and read receipts add pressure to reply.</span></dd>
-              <dt><span class="zh">我學到</span><span class="en">What I learned</span></dt>
-              <dd><span class="zh">這個題目來自我自己的經驗。跟爸爸的聊天室，幾乎只在要生活費時才打開，想道謝也只會傳貼圖。訪談時最難拿捏的，是怎麼問才不會引導受訪者。</span><span class="en">The topic came from my own experience. My chat with my dad opened almost only when I needed living expenses, and when I wanted to say thanks, I just sent a sticker. The hardest part of interviewing was asking questions without leading the participant.</span></dd>
-              <dt><span class="zh">和我想走的路</span><span class="en">Why it matters to me</span></dt>
-              <dd><span class="zh">臨床領域已經開始有線上諮商，但螢幕兩端無法真正眼神接觸。我想知道，在數位工具裡，信任要怎麼建立。</span><span class="en">Online counseling has begun to appear in clinical practice, yet people on either side of a screen cannot truly make eye contact. I want to understand how trust is built through digital tools.</span></dd>
+              <dt><span data-i18n="res.q.question">在問什麼</span></dt>
+              <dd><span data-i18n="res.r1.a1">華人家庭常常「愛在心裡口難開」。大學生離家後，LINE 和貼圖會不會讓家人之間比較說得出口？</span></dd>
+              <dt><span data-i18n="res.q.how">怎麼做</span></dt>
+              <dd><span data-i18n="res.r1.a2">4 人小組，以半結構式深度訪談訪問 8 位 21～23 歲的大學生，錄音轉成逐字稿後，用主題分析法整理。</span></dd>
+              <dt><span data-i18n="res.q.role">我負責</span></dt>
+              <dd><span data-i18n="res.r1.a3">和組員一起發想主題、設計訪綱；訪談 2 位受訪者，整理並編碼 2 份逐字稿；期中口頭報告。書面報告中，我撰寫了文獻回顧、研究目標、方法、結果與研究限制，也負責全文排版。</span></dd>
+              <dt><span data-i18n="res.q.findings">發現</span></dt>
+              <dd><span data-i18n="res.r1.a4">多數家庭仍然「做多於說」，用匯款、問一句「在幹嘛」表達關心。貼圖和文字降低了道謝、說愛的尷尬；但文字少了語氣，負面情緒容易被誤會，「已讀」也帶來回覆的壓力。</span></dd>
+              <dt><span data-i18n="proj.q6">我學到</span></dt>
+              <dd><span data-i18n="res.r1.a5">這個題目來自我自己的經驗。跟爸爸的聊天室，幾乎只在要生活費時才打開，想道謝也只會傳貼圖。訪談時最難拿捏的，是怎麼問才不會引導受訪者。</span></dd>
+              <dt><span data-i18n="res.q.path">和我想走的路</span></dt>
+              <dd><span data-i18n="res.r1.a6">臨床領域已經開始有線上諮商，但螢幕兩端無法真正眼神接觸。我想知道，在數位工具裡，信任要怎麼建立。</span></dd>
             </dl>
           </details>
         </div>
-        <div class="chips"><span class="chip"><span class="zh">質性研究</span><span class="en">Qualitative</span></span><span class="chip"><span class="zh">4 人小組</span><span class="en">Team of 4</span></span><span class="chip">2026</span></div>
+        <div class="r-side"><div class="r-art art-chat" aria-hidden="true"><i class="b1"></i><i class="b2"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-9.6A3.9 3.9 0 0 1 12 8a3.9 3.9 0 0 1 7 2.4C19 15.6 12 20 12 20z"/></svg></i></div>
+        <div class="chips"><span class="chip"><span data-i18n="res.r1.chip1">質性研究</span></span><span class="chip"><span data-i18n="res.r1.chip2">4 人小組</span></span><span class="chip">2026</span></div></div>
       </article>
       <article class="r-item reveal">
         <span class="r-no">02</span>
         <div>
-          <h3><span class="zh">直橫條紋對大學生身材知覺的影響</span><span class="en">Effects of Vertical vs. Horizontal Stripes on Perceived Body Size</span></h3>
-          <p><span class="zh">心理實驗。個人負責實驗企劃撰寫、研究文件校對與知情同意書。</span><span class="en">Psychology experiment. I wrote the research proposal, proofread study documents, and prepared the informed consent form.</span></p>
+          <h3><span data-i18n="res.r2.title">直橫條紋對大學生身材知覺的影響</span></h3>
+          <p><span data-i18n="res.r2.summary">心理實驗。我與組員共同撰寫實驗企劃、製作知情同意書，並負責研究文件校對。</span></p>
           <details class="r-more">
-            <summary><span class="zh">了解更多</span><span class="en">Read more</span><i aria-hidden="true"></i></summary>
+            <summary><span data-i18n="more.open">了解更多</span><i aria-hidden="true"></i></summary>
             <dl>
-              <dt><span class="zh">在問什麼</span><span class="en">The question</span></dt>
-              <dd><span class="zh">一般認為橫條紋顯胖、直條紋顯瘦，錯覺研究卻發現橫條紋看起來更窄。換成不同體型，結論還成立嗎？</span><span class="en">Horizontal stripes are said to make you look bigger and vertical ones slimmer, yet illusion research finds horizontal stripes look narrower. Does that hold across body types?</span></dd>
-              <dt><span class="zh">怎麼做</span><span class="en">How</span></dt>
-              <dd><span class="zh">5 人小組。用 3D 建模做出四種臀圍不同的女性模特，分別穿上直條紋與橫條紋，兩兩配對呈現在螢幕上，請大學生選出看起來較苗條的一方。</span><span class="en">Team of 5. We built 3D models of women with four different hip sizes, dressed each in vertical and horizontal stripes, showed them in pairs on screen, and asked college students to pick the slimmer-looking one.</span></dd>
-              <dt><span class="zh">我負責</span><span class="en">My role</span></dt>
-              <dd><span class="zh">和組員一起撰寫實驗企劃，校對研究文件，製作實驗同意書。</span><span class="en">Co-wrote the experiment proposal, proofread study documents, and prepared the informed consent form.</span></dd>
-              <dt><span class="zh">發現</span><span class="en">Findings</span></dt>
-              <dd><span class="zh">較瘦的兩種體型受條紋影響大，較胖的兩種幾乎沒差；標準體型反而是直條紋最顯瘦，和錯覺理論不符；男女受試者的判斷沒有顯著差異。</span><span class="en">Stripes strongly affected the two slimmer body types but barely changed the two fuller ones; the standard body type actually looked slimmest in vertical stripes, contrary to the illusion theory; male and female participants did not differ significantly.</span></dd>
-              <dt><span class="zh">我學到</span><span class="en">What I learned</span></dt>
-              <dd><span class="zh">寫同意書時，我們把匿名蒐集資料、身分保密，以及可以隨時退出、不必說明理由都寫進去，讓受試者能安心參與。結果和理論不符，回頭檢查才發現，指導語裡「苗條」怎麼定義，就足以讓結果大不相同。嚴謹的實驗裡，每個用詞都得精準，一點誤差就可能讓結果失準，這也是我覺得做研究最難的地方。</span><span class="en">In the consent form, we spelled out anonymous data collection, confidentiality, and the right to withdraw at any time without giving a reason, so participants could take part with peace of mind. When our results did not match the theory, we looked back and found that how the instructions defined “slim” was enough to change the outcome. In a rigorous experiment every word has to be precise, and a small slip can throw off the results. That is what I find hardest about research.</span></dd>
+              <dt><span data-i18n="res.q.question">在問什麼</span></dt>
+              <dd><span data-i18n="res.r2.a1">一般認為橫條紋顯胖、直條紋顯瘦，錯覺研究卻發現橫條紋看起來更窄。換成不同體型，結論還成立嗎？</span></dd>
+              <dt><span data-i18n="res.q.how">怎麼做</span></dt>
+              <dd><span data-i18n="res.r2.a2">5 人小組。用 3D 建模做出四種臀圍不同的女性模特，分別穿上直條紋與橫條紋，兩兩配對呈現在螢幕上，請大學生選出看起來較苗條的一方。</span></dd>
+              <dt><span data-i18n="res.q.role">我負責</span></dt>
+              <dd><span data-i18n="res.r2.a3">和組員一起撰寫實驗企劃，校對研究文件，製作實驗同意書。</span></dd>
+              <dt><span data-i18n="res.q.findings">發現</span></dt>
+              <dd><span data-i18n="res.r2.a4">較瘦的兩種體型受條紋影響大，較胖的兩種幾乎沒差；標準體型反而是直條紋最顯瘦，和錯覺理論不符；男女受試者的判斷沒有顯著差異。</span></dd>
+              <dt><span data-i18n="proj.q6">我學到</span></dt>
+              <dd><span data-i18n="res.r2.a5">寫同意書時，我們把匿名蒐集資料、身分保密，以及可以隨時退出、不必說明理由都寫進去，讓受試者能安心參與。結果和理論不符，回頭檢查才發現，指導語裡「苗條」怎麼定義，就足以讓結果大不相同。嚴謹的實驗裡，每個用詞都得精準，一點誤差就可能讓結果失準，這也是我覺得做研究最難的地方。</span></dd>
             </dl>
           </details>
         </div>
-        <div class="chips"><span class="chip"><span class="zh">實驗法</span><span class="en">Experiment</span></span><span class="chip"><span class="zh">5 人小組</span><span class="en">Team of 5</span></span><span class="chip">2024</span></div>
+        <div class="r-side"><button type="button" class="r-art art-stripes" aria-hidden="true" tabindex="-1"><i class="v"></i><i class="h"></i></button>
+        <div class="chips"><span class="chip"><span data-i18n="res.r2.chip1">實驗法</span></span><span class="chip"><span data-i18n="res.r2.chip2">5 人小組</span></span><span class="chip">2024</span></div></div>
       </article>
       <article class="r-item reveal">
         <span class="r-no">03</span>
         <div>
-          <h3><span class="zh">青少年自殺新聞的社會建構與分析</span><span class="en">The Social Construction of Youth Suicide in News Media</span></h3>
-          <p><span class="zh">分析媒體報導青少年自殺議題的立場與取向，並提出報導改善建議。</span><span class="en">Analyzed how news media framed youth suicide and proposed recommendations for better reporting.</span></p>
+          <h3><span data-i18n="res.r3.title">青少年自殺新聞的社會建構與分析</span></h3>
+          <p><span data-i18n="res.r3.summary">個人研究。分析三家媒體 2019～2021 年共 80 則青少年自殺報導與投書的動機呈現和報導立場，並提出改善建議。</span></p>
           <details class="r-more">
-            <summary><span class="zh">了解更多</span><span class="en">Read more</span><i aria-hidden="true"></i></summary>
+            <summary><span data-i18n="more.open">了解更多</span><i aria-hidden="true"></i></summary>
             <dl>
-              <dt><span class="zh">在問什麼</span><span class="en">The question</span></dt>
-              <dd><span class="zh">自殺是台灣 15～24 歲族群的第二大死因。新聞怎麼報導青少年自殺？讀者又怎麼回應？</span><span class="en">Suicide is the second leading cause of death among 15- to 24-year-olds in Taiwan. How does the news report youth suicide, and how do readers respond?</span></dd>
-              <dt><span class="zh">怎麼做</span><span class="en">How</span></dt>
-              <dd><span class="zh">個人研究，大一時完成。蒐集聯合新聞網、自由時報、中時電子報 2019～2021 年的青少年自殺報導與民眾投書共 80 則，依「自殺動機」與「報導立場」分類統計。</span><span class="en">An individual study completed in my first year. I collected 80 news reports and reader op-eds on youth suicide from United Daily News, Liberty Times, and China Times (2019–2021), and categorized them by reported motive and stance.</span></dd>
-              <dt><span class="zh">我負責</span><span class="en">My role</span></dt>
-              <dd><span class="zh">在指導老師指導下，由我完成資料蒐集、分類、分析與撰寫，並製作壁報參加 2023 人社院大學生研究計畫成果壁報論文競賽，獲得佳作。</span><span class="en">Under my advisor’s guidance, I carried out the data collection, categorization, analysis, and writing, and presented a poster at the 2023 College of Humanities and Social Sciences undergraduate research poster competition, receiving an Honorable Mention.</span></dd>
-              <dt><span class="zh">發現</span><span class="en">Findings</span></dt>
-              <dd><span class="zh">28% 的報導完全沒有交代自殺動機，媒體更在意「發生了什麼」，而非「為什麼」；最常見的立場是警覺警示與教育預防。我也提出改善建議：多報導成因、讓立場更多元，例如家屬更需要的是關注與同情。</span><span class="en">28% of reports gave no motive at all; the media focused more on what happened than on why. The most common stances were alert and warning, and education and prevention. I also proposed improvements: report more on causes and take more varied stances, since bereaved families may most need concern and compassion.</span></dd>
-              <dt><span class="zh">我學到</span><span class="en">What I learned</span></dt>
-              <dd><span class="zh">大一時看到那組統計數字，我想知道新聞怎麼談這件事。讀完 80 則報導，我開始想，正在低潮的青少年讀到這些新聞時，會有什麼感受。從找題目、蒐集資料到發表，我完整走過一次研究流程。</span><span class="en">After seeing those statistics in my first year, I wanted to know how the news talked about this. Reading 80 reports made me wonder how a teenager going through a hard time would feel reading them. From choosing a topic and collecting data to presenting, I went through the full research process.</span></dd>
-              <dt><span class="zh">和我想走的路</span><span class="en">Why it matters to me</span></dt>
-              <dd><span class="zh">這份研究讓我開始想，青少年的心理困境，能不能在問題發生之前就被看見。</span><span class="en">This study got me thinking about whether young people’s struggles can be noticed before a crisis happens.</span></dd>
+              <dt><span data-i18n="res.q.question">在問什麼</span></dt>
+              <dd><span data-i18n="res.r3.a1">自殺是台灣 15～24 歲族群的第二大死因。新聞怎麼報導青少年自殺？讀者又怎麼回應？</span></dd>
+              <dt><span data-i18n="res.q.how">怎麼做</span></dt>
+              <dd><span data-i18n="res.r3.a2">個人研究，大一時完成。蒐集聯合新聞網、自由時報、中時電子報 2019～2021 年的青少年自殺報導與民眾投書共 80 則，依「自殺動機」與「報導立場」分類統計。</span></dd>
+              <dt><span data-i18n="res.q.role">我負責</span></dt>
+              <dd><span data-i18n="res.r3.a3">在指導老師指導下，由我完成資料蒐集、分類、分析與撰寫，並製作壁報參加 2023 人社院大學生研究計畫成果壁報論文競賽，獲得佳作。</span></dd>
+              <dt><span data-i18n="res.q.findings">發現</span></dt>
+              <dd><span data-i18n="res.r3.a4">28% 的報導完全沒有交代自殺動機，媒體更在意「發生了什麼」，而非「為什麼」；最常見的立場是警覺警示與教育預防。我也提出改善建議：多報導成因、讓立場更多元，例如家屬更需要的是關注與同情。</span></dd>
+              <dt><span data-i18n="proj.q6">我學到</span></dt>
+              <dd><span data-i18n="res.r3.a5">大一時看到那組統計數字，我想知道新聞怎麼談這件事。讀完 80 則報導，我開始想，正在低潮的青少年讀到這些新聞時，會有什麼感受。從找題目、蒐集資料到發表，我完整走過一次研究流程。</span></dd>
+              <dt><span data-i18n="res.q.path">和我想走的路</span></dt>
+              <dd><span data-i18n="res.r3.a6">這份研究讓我開始想，青少年的心理困境，能不能在問題發生之前就被看見。</span></dd>
             </dl>
             <figure class="r-fig">
-              <img src="assets/poster_2023.jpg" width="1200" height="900" loading="lazy" alt="作者在 2023 人社院壁報論文競賽現場，向評審說明青少年自殺新聞研究的壁報">
-              <figcaption><span class="zh">2023 人社院大學生研究計畫成果壁報論文競賽現場</span><span class="en">Presenting at the 2023 College of Humanities and Social Sciences undergraduate research poster competition</span></figcaption>
+              <img src="assets/poster_2023.jpg" width="1200" height="900" loading="lazy" alt="作者在 2023 人社院壁報論文競賽現場，向評審說明青少年自殺新聞研究的壁報" data-i18n-alt="res.r3.imgAlt">
+              <figcaption><span data-i18n="res.r3.figcaption">2023 人社院大學生研究計畫成果壁報論文競賽現場</span></figcaption>
             </figure>
           </details>
         </div>
-        <div class="chips"><span class="chip"><span class="zh">個人研究</span><span class="en">Individual</span></span><span class="chip gold"><span class="zh">佳作</span><span class="en">Honorable Mention</span></span><span class="chip">2023</span></div>
+        <div class="r-side"><div class="r-art art-bars" aria-hidden="true"><span><em>28%</em><i style="--w:.28"></i></span><span><em>69%</em><i style="--w:.69"></i></span><span><em>63%</em><i style="--w:.63"></i></span></div>
+        <div class="chips"><span class="chip"><span data-i18n="res.r3.chip1">個人研究</span></span><span class="chip gold"><span data-i18n="res.r3.chip2">佳作</span></span><span class="chip">2023</span></div></div>
       </article>
     </div>
 
     <div class="cards four" id="skills">
-      <div class="card reveal"><div class="k"><span class="zh">行政</span><span class="en">Administration</span></div><p><span class="zh">公文處理、簽稿撰擬、資料彙整、簡報製作</span><span class="en">Official documents, memo drafting, data compilation, presentation slides</span></p></div>
-      <div class="card reveal d1"><div class="k"><span class="zh">研究</span><span class="en">Research</span></div><p><span class="zh">半結構式深度訪談、主題分析法、實驗設計</span><span class="en">Semi-structured interviews, thematic analysis, experimental design</span></p></div>
-      <div class="card reveal d2"><div class="k"><span class="zh">文書</span><span class="en">Office</span></div><p><span class="zh">Word、Excel、PowerPoint 基礎操作</span><span class="en">Basic Word, Excel, and PowerPoint</span></p></div>
-      <div class="card reveal d3"><div class="k"><span class="zh">語言</span><span class="en">Languages</span></div><p><span class="zh">中文（母語）、英文、台語（可基本對話）</span><span class="en">Mandarin (native), English, Taiwanese (conversational)</span></p></div>
+      <div class="card reveal"><div class="k"><span data-i18n="skill.admin">行政</span></div><p><span data-i18n="skill.adminDesc">公文處理、簽稿撰擬、資料彙整、簡報製作</span></p></div>
+      <div class="card reveal d1"><div class="k"><span data-i18n="nav.research">研究</span></div><p><span data-i18n="skill.researchDesc">半結構式深度訪談、主題分析法、實驗企劃撰寫</span></p></div>
+      <div class="card reveal d2"><div class="k"><span data-i18n="skill.office">文書</span></div><p><span data-i18n="skill.officeDesc">Word、Excel、PowerPoint 基礎操作</span></p></div>
+      <div class="card reveal d3"><div class="k"><span data-i18n="skill.lang">語言</span></div><p><span data-i18n="skill.langDesc">中文（母語）、英文、台語（可基本對話）</span></p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 興趣：機上娛樂 -->
+<section id="interests" class="pad">
+  <div class="wrap">
+    <p class="label reveal"><span data-i18n="int.label">06 — 機上娛樂</span></p>
+    <h2 class="display reveal d1"><span data-i18n="int.heading">工作之外的頻道</span></h2>
+    <div class="ife reveal d2">
+      <div class="ife-tabs" role="tablist" aria-label="頻道" data-i18n-aria="int.tabs">
+        <button type="button" role="tab" id="ife-t1" aria-controls="ife-p1" aria-selected="true"><span class="ife-ch">CH 1</span><span data-i18n="int.ch1">飛航</span></button>
+        <button type="button" role="tab" id="ife-t2" aria-controls="ife-p2" aria-selected="false" tabindex="-1"><span class="ife-ch">CH 2</span><span data-i18n="int.ch2">F1</span></button>
+        <button type="button" role="tab" id="ife-t3" aria-controls="ife-p3" aria-selected="false" tabindex="-1"><span class="ife-ch">CH 3</span><span data-i18n="int.ch3">音樂</span></button>
+      </div>
+      <div class="ife-screen">
+        <div class="ife-panel p-air on" role="tabpanel" id="ife-p1" aria-labelledby="ife-t1">
+          <div class="ife-window" aria-hidden="true"><i class="w-cloud a"></i><i class="w-cloud b"></i></div>
+          <p class="ife-meta">A350 · STARLUX</p>
+          <p class="ife-text" data-i18n="int.ch1Text">最喜歡的機型是 A350，最喜歡的航空公司是星宇航空。</p>
+        </div>
+        <div class="ife-panel p-f1" role="tabpanel" id="ife-p2" aria-labelledby="ife-t2" hidden>
+          <div class="ife-f1" aria-hidden="true">
+            <div class="f1-lights"><i></i><i></i><i></i><i></i><i></i></div>
+            <div class="f1-tower">
+              <div class="row lead"><b>1</b><em></em><span>PIA</span><small>McLAREN</small></div>
+              <div class="row"><b>2</b><em></em><span class="ph"></span></div>
+              <div class="row"><b>3</b><em></em><span class="ph s"></span></div>
+            </div>
+          </div>
+          <p class="ife-meta">McLAREN · OSCAR PIASTRI</p>
+          <p class="ife-text" data-i18n="int.ch2Text">支持 McLaren 車隊，最喜歡的車手是 Oscar Piastri，剛好和我同樣叫 Oscar。</p>
+        </div>
+        <div class="ife-panel p-music" role="tabpanel" id="ife-p3" aria-labelledby="ife-t3" hidden>
+          <div class="ife-eq" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          <p class="ife-meta">JJ LIN · TWICE · ITZY · NMIXX</p>
+          <p class="ife-text" data-i18n="int.ch3Text">華語常聽林俊傑；K-pop 喜歡 TWICE、ITZY、NMIXX。</p>
+        </div>
+        <i class="ife-scan" aria-hidden="true"></i>
+      </div>
+      <i class="ife-led" aria-hidden="true"></i>
+    </div>
+  </div>
+</section>
+
+<!-- Q&A -->
+<section id="faq" class="pad">
+  <div class="wrap">
+    <p class="label reveal"><span data-i18n="faq.label">07 — 旅客常見問題</span></p>
+    <h2 class="display reveal d1"><span data-i18n="faq.heading">你可能想問</span></h2>
+    <div class="faq-list reveal d2">
+      <details class="r-more faq"><summary><span data-i18n="faq.q1">為什麼從社工轉到心理？</span><i aria-hidden="true"></i></summary><p class="faq-a" data-i18n="faq.a1">大一修普通心理學時，我發現自己對心理學更有興趣，也更想發揮同理的能力。比較之後，我覺得心理師的工作更符合我對助人的想像，所以轉到心理系。社工系那一年讓我很早就開始關注人與社會制度的互動，這份關注後來也延續到我修的早療學程。</p></details>
+      <details class="r-more faq"><summary><span data-i18n="faq.q2">為什麼想當兒童臨床心理師？</span><i aria-hidden="true"></i></summary><p class="faq-a" data-i18n="faq.a2">修兒童發展與早期療育學程時，我很認同「及早發現、及早介入」對孩子的重要：越早有人看見孩子的需要，他們就越有機會好好長大。後來在兒少代表共識營，看到孩子們在短短幾天內突破自己，更讓我確定，想成為那個陪伴他們成長的人。</p></details>
     </div>
   </div>
 </section>
@@ -776,8 +497,8 @@ html.revisit .hero h1 .oscar{animation-delay:.25s,2s}
 <section id="contact" class="landing pad">
   <canvas class="dust" aria-hidden="true"></canvas>
   <div class="wrap">
-    <p class="label reveal"><span class="zh">06 — 聯絡</span><span class="en">06 — Contact</span></p>
-    <h2 class="display reveal d1"><span class="zh">謝謝你看到這裡，<br>歡迎與我聯絡。</span><span class="en">Thanks for flying by.<br>Let's keep in touch.</span></h2>
+    <p class="label reveal"><span data-i18n="contact.label">08 — 聯絡</span></p>
+    <h2 class="display reveal d1"><span data-i18n="contact.heading">謝謝你看到這裡，<br>歡迎與我聯絡。</span></h2>
     <a class="mail reveal d2" href="mailto:oscar.chiahung.lin@gmail.com">oscar.chiahung.lin@gmail.com <span aria-hidden="true">↗</span></a>
     <ul class="social reveal d2">
       <li><a href="https://www.instagram.com/0scar.1in_/" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".6" fill="currentColor"/></svg></a></li>
@@ -785,178 +506,19 @@ html.revisit .hero h1 .oscar{animation-delay:.25s,2s}
       <li><a href="https://x.com/oscar_chiahung" target="_blank" rel="noopener" aria-label="X" title="X"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 4.5h4.2l10.8 15h-4.2z"/><path d="M19 4.5l-5.6 6.3M10.6 13.2L5 19.5"/></svg></a></li>
       <li><a href="https://www.threads.com/@0scar.1in_" target="_blank" rel="noopener" aria-label="Threads" title="Threads"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.3"/><path d="M15.3 12v1.4c0 1.4.9 2.2 2 2.2s2.2-.9 2.2-3.6c0-4.2-3.4-7.5-7.5-7.5S4.5 7.8 4.5 12s3.3 7.5 7.5 7.5c1.5 0 2.9-.4 4-1.1"/></svg></a></li>
     </ul>
-    <img class="sig reveal" src="assets/signature_ink.png" width="1298" height="356" alt="Oscar Lin 簽名" loading="lazy">
-    <footer>© 2026 林家弘 · Chia-Hung (Oscar) Lin<br><span class="zh">最後更新：2026.11</span><span class="en">Last updated: Nov 2026</span></footer>
+    <button type="button" class="sig-wrap" id="sig">
+      <span class="sr-only"><span data-i18n="contact.sigLabel">Oscar Lin 簽名。點一下可以重看書寫過程</span></span>
+      <img class="sig" src="assets/signature_ink.png" width="1298" height="356" alt="" loading="lazy">
+      <canvas width="1297" height="355" aria-hidden="true"></canvas>
+    </button>
+    <footer><span data-i18n="footer.copyright">© 2026 林家弘 · Chia-Hung (Oscar) Lin</span><br><span data-i18n="footer.updated">最後更新：2026.11</span><span class="machine-note" data-i18n="footer.machineNote" hidden></span></footer>
   </div>
 </section>
 </main>
 
-<script>
-(function(){
-  var root=document.documentElement;
-  // 保險：動畫沒跑完也會在 3 秒後移除開場幕布
-  setTimeout(function(){var c=document.querySelector('.curtain');if(c)c.remove()},1600);
-  try{localStorage.setItem('seenIntro','1')}catch(e){}
-  // 語言
-  function setLang(l){
-    root.setAttribute('data-lang',l);
-    root.setAttribute('lang',l==='en'?'en':'zh-Hant');
-    document.querySelectorAll('.lang button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.set===l?'true':'false')});
-    try{localStorage.setItem('lang',l)}catch(e){}
-  }
-  var saved=null;try{saved=localStorage.getItem('lang')}catch(e){}
-  if(saved==='en'||saved==='zh')setLang(saved);
-  document.querySelectorAll('.lang button').forEach(function(b){b.addEventListener('click',function(){setLang(b.dataset.set)})});
-
-  // 捲動淡入
-  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.15,rootMargin:'0px 0px -6% 0px'});
-  document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
-
-  // 導覽列與高度計
-  var nav=document.getElementById('nav'),alt=document.getElementById('alt'),v=document.getElementById('altv'),p=document.getElementById('altp');
-  var darks=[].slice.call(document.querySelectorAll('[data-dark]'));
-  var MAX=32000,ticking=false;
-  function phase(a){
-    var zh=root.getAttribute('data-lang')==='zh';
-    if(a<=0)return zh?'已抵達':'ARRIVED';
-    if(a<6000)return zh?'進場':'APPROACH';
-    if(a<22000)return zh?'下降':'DESCENT';
-    return zh?'巡航':'CRUISING';
-  }
-  function update(){
-    ticking=false;
-    var y=window.scrollY,max=document.documentElement.scrollHeight-window.innerHeight;
-    var r=max>0?Math.min(1,Math.max(0,y/max)):0;
-    var a=Math.round((1-r)*MAX/100)*100;
-    if(r>.995)a=0;
-    v.textContent=a.toLocaleString('en-US');
-    p.textContent=phase(a);
-    nav.classList.toggle('solid',y>window.innerHeight*.6);
-    var mid=window.innerHeight/2,onDark=darks.some(function(s){var b=s.getBoundingClientRect();return b.top<mid&&b.bottom>mid});
-    alt.classList.toggle('ondark',onDark);
-  }
-  window.addEventListener('scroll',function(){if(!ticking){ticking=true;requestAnimationFrame(update)}},{passive:true});
-  window.addEventListener('resize',update);
-  document.querySelectorAll('.lang button').forEach(function(b){b.addEventListener('click',update)});
-  update();
-
-
-
-  // 列印時展開所有「了解更多」
-  (function(){
-    var closed=[];
-    window.addEventListener('beforeprint',function(){closed=[].filter.call(document.querySelectorAll('details.r-more'),function(d){return !d.open});closed.forEach(function(d){d.open=true})});
-    window.addEventListener('afterprint',function(){closed.forEach(function(d){d.open=false});closed=[]});
-  })();
-
-  // 手機選單
-  (function(){
-    var nav=document.getElementById('nav'),btn=document.getElementById('menuBtn');
-    if(!btn)return;
-    function set(o){nav.classList.toggle('open',o);btn.setAttribute('aria-expanded',o?'true':'false')}
-    btn.addEventListener('click',function(){set(!nav.classList.contains('open'))});
-    document.querySelectorAll('#navLinks a').forEach(function(a){a.addEventListener('click',function(){set(false)})});
-    document.addEventListener('keydown',function(e){if(e.key==='Escape'&&nav.classList.contains('open')){set(false);btn.focus()}});
-    window.addEventListener('resize',function(){if(window.innerWidth>900)set(false)});
-  })();
-
-  // ===== 華麗動畫 =====
-  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var fine=window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-  // 名字逐字
-  var h1=document.querySelector('.hero h1');
-  if(h1){
-    var idx=0;
-    [].slice.call(h1.childNodes).forEach(function(n){
-      if(n.nodeType!==3)return;
-      var frag=document.createDocumentFragment();
-      n.textContent.split(' ').forEach(function(word,wi){
-        if(wi){frag.appendChild(document.createTextNode(' '));idx++;}
-        if(!word)return;
-        var w=document.createElement('span');w.className='word';w.setAttribute('aria-hidden','true');
-        word.split('').forEach(function(c){
-          var sp=document.createElement('span');sp.className='ch';
-          sp.textContent=c;sp.style.setProperty('--i',idx++);w.appendChild(sp);
-        });
-        frag.appendChild(w);
-      });
-      h1.replaceChild(frag,n);
-    });
-    h1.setAttribute('aria-label','Chia-Hung (Oscar) Lin');
-    h1.classList.add('split');
-  }
-  // 標題遮罩
-  document.querySelectorAll('.display').forEach(function(d){
-    var w=document.createElement('span');w.className='mask-in';
-    while(d.firstChild)w.appendChild(d.firstChild);d.appendChild(w);
-  });
-  // 經歷航線
-  var log=document.querySelector('.log');
-  if(log){var r=document.createElement('div');r.className='route';r.setAttribute('aria-hidden','true');
-    r.innerHTML='<i></i><svg viewBox="-40 -14 44 28"><path d="M0 0 L-14 -4 L-18 -12 L-21 -12 L-19 -3 L-30 -2 L-34 -7 L-36 -7 L-35 0 L-36 7 L-34 7 L-30 2 L-19 3 L-21 12 L-18 12 L-14 4 Z"/></svg>';
-    log.appendChild(r);}
-  // 數字跳動
-  function countUp(el){
-    var node=null;
-    for(var k=0;k<el.childNodes.length;k++){var c=el.childNodes[k];if(c.nodeType===3&&/\d/.test(c.textContent)){node=c;break}}
-    if(!node)return;
-    var m=node.textContent.match(/(\d+(?:\.\d+)?)/);if(!m)return;
-    var target=parseFloat(m[1]),dec=(m[1].split('.')[1]||'').length,pre=node.textContent.slice(0,m.index),post=node.textContent.slice(m.index+m[1].length);
-    var from=target>=1000?target-30:0,t0=null,D=1600;
-    function step(ts){if(!t0)t0=ts;var u=Math.min(1,(ts-t0)/D),e=1-Math.pow(1-u,4);
-      node.textContent=pre+(from+(target-from)*e).toFixed(dec)+post;if(u<1)requestAnimationFrame(step)}
-    requestAnimationFrame(step);
-  }
-  if(!reduce){
-    var cio=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){countUp(e.target);cio.unobserve(e.target)}})},{threshold:.6});
-    document.querySelectorAll('.stat .v').forEach(function(el){cio.observe(el)});
-  }
-  // 深色段落滑鼠光暈
-  if(fine&&!reduce){document.querySelectorAll('.dark').forEach(function(d){
-    var sp=document.createElement('div');sp.className='spot';d.insertBefore(sp,d.firstChild);
-    d.addEventListener('mousemove',function(ev){var b=d.getBoundingClientRect();d.style.setProperty('--mx',(ev.clientX-b.left)+'px');d.style.setProperty('--my',(ev.clientY-b.top)+'px')});
-  })}
-  // 金色微塵
-  function dust(cv){
-    var ctx=cv.getContext('2d'),ps=[],w=0,h=0,dpr=Math.min(2,window.devicePixelRatio||1),on=false;
-    function size(){w=cv.clientWidth;h=cv.clientHeight;cv.width=w*dpr;cv.height=h*dpr;ctx.setTransform(dpr,0,0,dpr,0,0)}
-    size();window.addEventListener('resize',size);
-    var n=Math.round(Math.min(46,w/28));
-    for(var i=0;i<n;i++)ps.push({x:Math.random()*w,y:Math.random()*h,r:.6+Math.random()*1.8,vy:-(.08+Math.random()*.22),vx:(Math.random()-.5)*.12,ph:Math.random()*6.28,sp:.6+Math.random()*1.4});
-    function frame(t){
-      if(!on)return;
-      ctx.clearRect(0,0,w,h);
-      for(var i=0;i<ps.length;i++){var p=ps[i];p.x+=p.vx;p.y+=p.vy;if(p.y<-10){p.y=h+10;p.x=Math.random()*w}
-        var a=.25+.55*(.5+.5*Math.sin(t/1000*p.sp+p.ph));
-        var g=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*4);g.addColorStop(0,'rgba(255,240,205,'+a+')');g.addColorStop(1,'rgba(214,178,112,0)');
-        ctx.fillStyle=g;ctx.beginPath();ctx.arc(p.x,p.y,p.r*4,0,6.283);ctx.fill()}
-      requestAnimationFrame(frame);
-    }
-    new IntersectionObserver(function(es){var vis=es[0].isIntersecting;if(vis&&!on){on=true;requestAnimationFrame(frame)}else if(!vis){on=false}}).observe(cv);
-  }
-  if(!reduce)document.querySelectorAll('.dust').forEach(dust);
-  // 捲動效果：進度條、雲層景深、開場內容淡出、深色段落展開、經歷航線
-  var prog=document.getElementById('progress'),heroIn=document.querySelector('.hero-inner'),
-      clouds=[].slice.call(document.querySelectorAll('.cloud')),speeds=[.35,.22,.5,.15],sun=document.querySelector('.sun'),
-      darkSecs=[].slice.call(document.querySelectorAll('.dark')),route=document.querySelector('.route');
-  function fx(){
-    var y=window.scrollY,vh=window.innerHeight,max=document.documentElement.scrollHeight-vh;
-    if(prog)prog.style.transform='scaleX('+(max>0?y/max:0)+')';
-    if(reduce)return;
-    if(y<vh*1.2){
-      var k=fine?1:.5;
-      clouds.forEach(function(c,i){c.style.translate='0 '+(y*speeds[i]*k)+'px'});
-      if(sun)sun.style.translate='0 '+(-y*.15*k)+'px';
-      if(heroIn){heroIn.style.transform='translateY('+(y*.25)+'px)';heroIn.style.opacity=Math.max(0,1-y/(vh*.75))}
-    }
-    darkSecs.forEach(function(d){if(d.getBoundingClientRect().top<vh*.82)d.classList.add('open')});
-    if(route){var b=route.parentNode.getBoundingClientRect();var rp=Math.min(1,Math.max(0,(vh*.6-b.top)/b.height));route.style.setProperty('--rp',rp.toFixed(4))}
-  }
-  var fxTick=false;
-  window.addEventListener('scroll',function(){if(!fxTick){fxTick=true;requestAnimationFrame(function(){fxTick=false;fx()})}},{passive:true});
-  window.addEventListener('resize',fx);
-  fx();
-})();
-</script>
+<script src="js/i18n.js?v=20261116"></script>
+<script src="js/main.js?v=20261116"></script>
+<script src="js/signature.js?v=20261116"></script>
+<script src="js/sections.js?v=20261116"></script>
 </body>
 </html>

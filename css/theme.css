@@ -1,0 +1,118 @@
+/* =========================================================
+   深淺色與天空
+   html[data-theme="light|dark"]：整站配色（js/theme.js 依日出日落或手動設定）
+   html[data-sky="day|dusk|night"]：開場天空與結尾暮色
+   深色原則：底色用深森林綠而非純黑、文字用米白而非純白、金色調亮調淡。
+   對比（對 #161B18）：主要文字 14.3、內文 11.5、次要文字 8.2、金色小字 9.7。
+   ========================================================= */
+html{color-scheme:light}
+html[data-theme="dark"]{
+  color-scheme:dark;
+  --cream:#161B18;            /* 頁面背景 */
+  --paper:#1A201C;            /* 交替區塊 */
+  --card:#222A25;             /* 卡片 */
+  --ink:#EFE8DC;              /* 主要文字 */
+  --ink-body:#DAD2C5;         /* 內文 */
+  --muted:#B9B1A3;            /* 次要文字 */
+  --gold:#C9A66B;             /* 裝飾金 */
+  --gold-ink:#D9BE8C;         /* 小字金 */
+  --gold-soft:#CDB389;
+  --forest:#202B25;           /* 「經歷」區塊：比頁面亮一階，像浮起的面板 */
+  --forest-2:#2A372F;
+  --line:rgba(239,232,220,.14);
+  --line-dark:rgba(239,232,220,.16);
+  --nav-bg:rgba(22,27,24,.94);
+  --surface-hover:#2B342E;
+  --line-strong:rgba(239,232,220,.38);
+  --footer-text:#D9D1C3;
+  --toggle-on-bg:var(--gold);
+  --toggle-on-text:#161B18;
+  --landing-bg:linear-gradient(180deg,var(--cream) 0%,#18202A 38%,#2A2832 66%,#45343A 86%,#573B35 100%);
+}
+/* 簽名的備用圖片是深色墨跡，深色模式反相成淺色 */
+html[data-theme="dark"] .sig-wrap .sig{filter:invert(1) brightness(.94)}
+html[data-theme="dark"] .card:hover{box-shadow:0 22px 40px -24px rgba(0,0,0,.7)}
+html[data-theme="dark"] .curtain{background:#0F1411}
+
+/* ---------- 天空：黃昏（淺色模式，日出後與日落前） ---------- */
+html[data-sky="dusk"]{
+  --sky-bg:linear-gradient(180deg,#93A0CC 0%,#CDA3B6 34%,#F2B890 62%,#F6D9A8 84%,var(--cream) 100%);
+}
+html[data-sky="dusk"] .cloud{background:radial-gradient(closest-side,rgba(255,238,224,.95),rgba(255,222,200,.55) 55%,rgba(255,222,200,0))}
+html[data-sky="dusk"] .sun{background:radial-gradient(closest-side,rgba(255,176,112,.9),rgba(255,160,110,.36) 45%,rgba(255,160,110,0) 70%)}
+html[data-sky="dusk"] .hero h1 .oscar{background-image:linear-gradient(110deg,#7A5C30 30%,#FBEFD2 48%,#94703C 54%,#7A5C30 70%)}
+html[data-sky="dusk"] .hero .eyebrow,html[data-sky="dusk"] .hero .scroll-cue{color:var(--ink-body)}
+html[data-sky="dusk"] .hero .scroll-cue i{background:linear-gradient(var(--ink-body),transparent)}
+
+/* ---------- 天空：夜晚（深色模式） ---------- */
+html[data-sky="night"]{
+  --sky-bg:linear-gradient(180deg,#0A111E 0%,#101A2A 38%,#16212C 68%,#181F20 88%,var(--cream) 100%);
+}
+/* 星空：三層不同大小的星點，往下漸漸淡出 */
+html[data-sky="night"] .hero::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:
+    radial-gradient(1.2px 1.2px at 24px 38px,rgba(255,255,255,.9),transparent),
+    radial-gradient(1px 1px at 142px 96px,rgba(255,255,255,.7),transparent),
+    radial-gradient(1.4px 1.4px at 203px 22px,rgba(255,244,214,.9),transparent),
+    radial-gradient(1px 1px at 78px 168px,rgba(255,255,255,.55),transparent),
+    radial-gradient(1px 1px at 260px 150px,rgba(255,255,255,.6),transparent),
+    radial-gradient(1.6px 1.6px at 320px 70px,rgba(255,255,255,.85),transparent),
+    radial-gradient(1px 1px at 380px 190px,rgba(255,244,214,.6),transparent),
+    radial-gradient(1px 1px at 455px 40px,rgba(255,255,255,.5),transparent),
+    radial-gradient(1.2px 1.2px at 510px 130px,rgba(255,255,255,.75),transparent);
+  background-size:560px 230px,560px 230px,560px 230px,560px 230px,560px 230px,560px 230px,560px 230px,560px 230px,560px 230px;
+  -webkit-mask-image:linear-gradient(180deg,#000 0%,#000 45%,transparent 82%);mask-image:linear-gradient(180deg,#000 0%,#000 45%,transparent 82%);
+  animation:twinkle 7s ease-in-out infinite}
+@keyframes twinkle{0%,100%{opacity:.95}50%{opacity:.6}}
+html[data-sky="night"] .cloud{background:radial-gradient(closest-side,rgba(150,172,208,.20),rgba(150,172,208,.09) 55%,rgba(150,172,208,0))}
+/* 太陽換成月亮 */
+html[data-sky="night"] .sun{width:92px;height:92px;left:7%;right:auto;top:9%;bottom:auto;
+  background:radial-gradient(circle at 36% 34%,#FCF6E3 0%,#EEE3C4 55%,#D6C9A4 100%);
+  box-shadow:0 0 70px 22px rgba(240,226,182,.22),0 0 160px 70px rgba(240,226,182,.10);
+  animation:moonBreath 9s ease-in-out infinite}
+@keyframes moonBreath{0%,100%{opacity:.92}50%{opacity:1}}
+html[data-sky="night"] .flight .trail{stroke:rgba(255,255,255,.55)}
+/* 飛機的航行燈（只在夜晚亮） */
+.flight .navlight{opacity:0}
+html[data-sky="night"] .flight .navlight{animation:blink 1.6s steps(1,end) infinite}
+html[data-sky="night"] .flight .navlight.g{animation-delay:.8s}
+@keyframes blink{0%,60%{opacity:1}61%,100%{opacity:0}}
+@media (max-width:900px){
+  html[data-sky="night"] .sun{width:60px;height:60px;left:8%;right:auto;top:11%;bottom:auto}
+}
+
+/* ---------- 外觀切換按鈕 ---------- */
+.theme-btn{position:relative;display:grid;place-items:center;width:36px;height:36px;border:1px solid var(--line);background:transparent;color:var(--ink);cursor:pointer;padding:0}
+.theme-btn svg{width:18px;height:18px;display:none;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.theme-btn[data-mode="auto"] .i-auto,.theme-btn[data-mode="light"] .i-light,.theme-btn[data-mode="dark"] .i-dark{display:block}
+.theme-btn:hover{border-color:var(--gold)}
+.theme-btn:focus-visible{outline:1px solid var(--gold-ink);outline-offset:3px}
+.theme-btn .tip{position:absolute;top:calc(100% + 8px);right:0;white-space:nowrap;padding:6px 10px;font:500 11px/1.4 var(--sans);letter-spacing:.08em;
+  background:var(--ink);color:var(--cream);opacity:0;transform:translateY(-4px);pointer-events:none;transition:opacity .25s,transform .25s}
+.theme-btn:hover .tip,.theme-btn:focus-visible .tip,.theme-btn.show .tip{opacity:1;transform:none}
+@media (max-width:480px){
+  .nav-right{gap:10px}
+  .altimeter .p{display:none}
+}
+@media (max-width:359px){.altimeter{display:none!important}}
+
+/* 切換時顏色平滑過渡（只在切換的瞬間啟用，避免影響其他動畫） */
+html.theme-anim,html.theme-anim body,html.theme-anim section,html.theme-anim .nav,html.theme-anim .card,html.theme-anim .stat,html.theme-anim .stats,html.theme-anim .chip,html.theme-anim .cards{
+  transition:background-color .6s ease,color .6s ease,border-color .6s ease!important}
+@media (prefers-reduced-motion: reduce){
+  html[data-sky="night"] .hero::before,html[data-sky="night"] .sun,html[data-sky="night"] .flight .navlight{animation:none}
+  html[data-sky="night"] .flight .navlight{opacity:1}
+  html.theme-anim *{transition:none!important}
+}
+@media print{.theme-btn{display:none!important}}
+
+/* ---------- 各語言字型與排版 ---------- */
+html[data-locale="zh-Hans"]{--zh-serif:'Noto Serif SC','Noto Serif TC','Cormorant Garamond',serif;--sans:'Inter',-apple-system,'PingFang SC','Noto Sans CJK SC','Microsoft YaHei',system-ui,sans-serif}
+html[data-locale="ja"]{--zh-serif:'Noto Serif JP','Cormorant Garamond',serif;--sans:'Inter',-apple-system,'Hiragino Sans','Noto Sans CJK JP','Yu Gothic','Meiryo',system-ui,sans-serif}
+html[data-locale="ko"]{--zh-serif:'Noto Serif KR','Cormorant Garamond',serif;--sans:'Inter',-apple-system,'Apple SD Gothic Neo','Noto Sans CJK KR','Malgun Gothic',system-ui,sans-serif}
+html[data-locale="ja"] body{line-break:strict}
+html[data-locale="ja"] .display,html[data-locale="ja"] .tagline,html[data-locale="ja"] h3{word-break:auto-phrase}
+html[data-locale="ko"] body{word-break:keep-all;overflow-wrap:anywhere}
+html[data-locale="ko"] .line,html[data-locale="ja"] .line{white-space:normal}
+.machine-note{display:block;margin-top:10px;letter-spacing:.06em;text-transform:none;opacity:.8}
+.machine-note[hidden]{display:none}

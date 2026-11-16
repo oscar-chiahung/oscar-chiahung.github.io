@@ -1,0 +1,101 @@
+/* =========================================================
+   設計變數（design tokens）
+   所有顏色、字體、間距、動畫時間都從這裡取，不在別處寫死。
+   深色模式（階段 2）只需要覆寫「語意顏色」這一組。
+   ========================================================= */
+:root{
+  /* ---- 1. 原色（只給下面的語意顏色引用，樣式裡盡量不直接用） ---- */
+  --cream:#F3EDE4;
+  --paper:#FAF6EF;
+  --card:#FDFAF5;
+  --ink:#2B211A;
+  --muted:#6F6359;
+  --gold:#B08D57;
+  --gold-soft:#CDB389;
+  --gold-ink:#7A5C30;
+  --forest:#26302A;
+  --forest-2:#313D35;
+  --on-dark:#EFE8DC;
+  --on-dark-muted:#B9B1A3;
+  --line:rgba(43,33,26,.14);
+  --line-dark:rgba(239,232,220,.16);
+  --sky-1:#8FBCE6;
+  --sky-2:#BCD8EE;
+  --sky-3:#E6E9E6;
+  --sky-4:#F2E2C6;
+  --serif:'Cormorant Garamond','Noto Serif TC',serif;
+  --sans:'Inter',-apple-system,'PingFang TC','Noto Sans CJK TC','Microsoft JhengHei',system-ui,sans-serif;
+  --zh-serif:'Noto Serif TC','Cormorant Garamond',serif;
+  --ink-body:#3D332B;
+
+  /* ---- 2. 語意顏色（淺色模式）；對比數字是對 --bg 計算 ---- */
+  --bg:var(--cream);               /* 頁面背景 */
+  --bg-alt:var(--paper);           /* 交替區塊背景 */
+  --surface:var(--card);           /* 卡片 */
+  --text:var(--ink);               /* 標題與主要文字 13.5:1 */
+  --text-body:var(--ink-body);     /* 內文 10.6:1 */
+  --text-muted:var(--muted);       /* 次要文字 5.0:1 */
+  --accent:var(--gold);            /* 裝飾與大字用的金色（小字不可用，2.7:1） */
+  --accent-text:var(--gold-ink);   /* 小字用的金色 5.3:1 */
+  --accent-soft:var(--gold-soft);
+  --border:var(--line);
+  --inverse-bg:var(--forest);      /* 深色區塊 */
+  --inverse-text:var(--on-dark);
+  --inverse-muted:var(--on-dark-muted);
+  --inverse-border:var(--line-dark);
+  /* 會隨深淺色改變的零件 */
+  --nav-bg:rgba(250,246,239,.96);          /* 導覽列捲動後的底色 */
+  --surface-hover:#FFFFFF;                 /* 卡片滑鼠移上去 */
+  --line-strong:rgba(43,33,26,.35);
+  --footer-text:#5A4A3E;
+  --toggle-on-bg:var(--gold-ink);          /* 語言、外觀按鈕選中時（白字對比 6.0） */
+  --toggle-on-text:#FFFFFF;
+  --sky-bg:linear-gradient(180deg,var(--sky-1) 0%,var(--sky-2) 38%,var(--sky-3) 68%,var(--sky-4) 88%,var(--cream) 100%);
+  --landing-bg:linear-gradient(180deg,var(--cream) 0%,#F1DDC0 45%,#E9C7A6 75%,#D9AE95 100%);
+
+  /* ---- 3. 字體 ---- */
+  --font-display:var(--serif);     /* 英文標題 */
+  --font-display-cjk:var(--zh-serif);
+  --font-body:var(--sans);
+  --font-mono:'Inter',ui-monospace,monospace;
+  /* 字級（階段 4 會把現有的零散字級收斂到這組） */
+  --fs-label:12px;                 /* 最小字級：標籤 */
+  --fs-small:14px;                 /* 次要文字 */
+  --fs-body:16px;                  /* 內文 */
+  --fs-lede:17px;                  /* 引言 */
+  --fs-h3:clamp(19px,2vw,24px);
+  --fs-h2:clamp(30px,4.2vw,54px);
+  --fs-h1:clamp(48px,9.5vw,138px);
+  /* 字重：內文目標 400（現況 300，階段 4 調整） */
+  --fw-light:300;
+  --fw-regular:400;
+  --fw-medium:500;
+  /* 行高與行長 */
+  --lh-body:1.75;
+  --lh-cjk:1.8;
+  --lh-latin:1.6;
+  --lh-tight:1.25;
+  --measure-cjk:38em;              /* 中日韓一行約 25～40 字 */
+  --measure-latin:68ch;            /* 英文一行 45～90 字元 */
+  --tracking-label:.2em;
+
+  /* ---- 4. 間距（8px 為基準） ---- */
+  --sp-1:4px; --sp-2:8px; --sp-3:12px; --sp-4:16px; --sp-5:24px;
+  --sp-6:32px; --sp-7:48px; --sp-8:64px; --sp-9:96px; --sp-10:128px;
+  --gutter:clamp(20px,5vw,64px);
+  --section-pad:clamp(72px,11vw,150px);
+  --wrap:1180px;
+  --radius-s:4px; --radius-m:12px; --radius-l:32px; --radius-full:999px;
+
+  /* ---- 5. 動畫 ---- */
+  --dur-micro:.2s;                 /* 滑鼠、按鈕 */
+  --dur-short:.35s;
+  --dur-reveal:.8s;                /* 區塊進場 */
+  --dur-scene:1.2s;                /* 大場面 */
+  --ease-out:cubic-bezier(.16,1,.3,1);
+  --ease-soft:cubic-bezier(.2,.7,.2,1);
+  --ease-in-out:cubic-bezier(.77,0,.18,1);
+
+  /* ---- 6. 層級 ---- */
+  --z-content:2; --z-nav:50; --z-progress:60; --z-cursor:80; --z-curtain:100;
+}
